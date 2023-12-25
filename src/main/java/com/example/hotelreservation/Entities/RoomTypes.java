@@ -1,4 +1,4 @@
-package com.example.otelreservation.Entities;
+package com.example.hotelreservation.Entities;
 
 public enum RoomTypes {
     OnePersonRoom,

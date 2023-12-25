@@ -1,4 +1,4 @@
-package com.example.otelreservation;
+package com.example.hotelreservation;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

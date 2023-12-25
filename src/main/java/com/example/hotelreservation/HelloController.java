@@ -1,4 +1,4 @@
-package com.example.otelreservation;
+package com.example.hotelreservation;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

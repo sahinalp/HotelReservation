@@ -1,4 +1,4 @@
-package com.example.otelreservation.Entities;
+package com.example.hotelreservation.Entities;
 
 public interface IEntity {
     public String getValues();

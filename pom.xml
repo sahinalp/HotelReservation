@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>OtelReservation</artifactId>
+  <artifactId>HotelReservation</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>OtelReservation</name>
 
@@ -68,7 +68,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.example.otelreservation/com.example.otelreservation.HelloApplication</mainClass>
+              <mainClass>com.example.otelreservation/com.example.hotelreservation.HelloApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
