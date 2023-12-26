@@ -10,7 +10,8 @@ public class Customer implements IEntity{
     private String identificationNumber;
     private String birthDate;
 
-    public Customer(String ID, String username, String password, String mail, String name, String surname, String identificationNumber, String birthDate) {
+    public Customer(String ID, String username, String password, String mail, String name, String surname,
+                    String identificationNumber, String birthDate) {
         this.ID = ID;
         this.username = username;
         this.password = password;
@@ -23,8 +24,9 @@ public class Customer implements IEntity{
 
     @Override
     public String getValues() {
-        return "'"+this.ID+"'"+","+"'"+this.username+"'"+","+"'"+this.password+"'"+","+"'"+this.mail+"'"+","+"'"+
-                this.name+"'"+","+"'"+this.surname+"'"+","+"'"+this.identificationNumber+"'"+","+"'"+this.birthDate+"'";
+        return "'"+this.ID+"'"+","+"'"+this.username+"'"+","+"'"+this.password+"'"+","+"'"+this.mail+"'"+","+
+                "'"+this.name+"'"+","+"'"+this.surname+"'"+","+"'"+this.identificationNumber+"'"+","+
+                "'"+this.birthDate+"'";
     }
 
     @Override
