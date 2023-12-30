@@ -10,6 +10,10 @@ public class Customer implements IEntity{
     private String identificationNumber;
     private String birthDate;
 
+    private String phone;
+
+    private  int gender;
+
     public Customer(String ID, String username, String password, String mail, String name, String surname,
                     String identificationNumber, String birthDate) {
         this.ID = ID;
