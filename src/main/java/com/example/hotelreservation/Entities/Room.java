@@ -11,6 +11,8 @@ public class Room implements IEntity{
     private int roomSize;
     private Double price;
 
+    private String currency;
+
     public Room(String ID, String hotelID, RoomTypes roomType, Boolean isFull, String facilities,
                 String description, String photo, int roomSize, Double price) {
         this.ID = ID;
