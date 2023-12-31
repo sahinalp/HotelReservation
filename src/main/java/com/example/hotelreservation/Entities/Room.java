@@ -2,8 +2,7 @@ package com.example.hotelreservation.Entities;
 
 public class Room implements IEntity{
     private String ID;
-    private String hotelID;
-    private RoomTypes roomType;
+    private RoomTypes type;
     private Boolean isFull;
     private String facilities;
     private String description;
@@ -13,11 +12,12 @@ public class Room implements IEntity{
 
     private String currency;
 
-    public Room(String ID, String hotelID, RoomTypes roomType, Boolean isFull, String facilities,
+    private int number;
+
+    public Room(String ID, RoomTypes type, Boolean isFull, String facilities,
                 String description, String photo, int roomSize, Double price) {
         this.ID = ID;
-        this.hotelID = hotelID;
-        this.roomType = roomType;
+        this.type = type;
         this.isFull = isFull;
         this.facilities = facilities;
         this.description = description;
@@ -28,13 +28,13 @@ public class Room implements IEntity{
 
     @Override
     public String getValues() {
-        return "'"+this.ID+"'"+","+"'"+this.hotelID+"'"+","+"'"+this.roomType+"'"+","+this.isFull+","+
+        return "'"+this.ID+"'"+"'"+this.type+"'"+","+this.isFull+","+
                 "'"+this.facilities +"'"+","+"'"+this.description+"'"+","+"'"+this.photo+"'"+","+
                 this.roomSize+","+this.price;
     }
 
     @Override
     public String getColumns() {
-        return "ID,hotelID,roomType,isFull,facilities,description,photo,roomSize,price";
+        return "ID,type,isFull,facilities,description,photo,roomSize,price";
     }
 }
