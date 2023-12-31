@@ -5,4 +5,6 @@ public interface ICustomerService {
     void register();
 
     void updateInfo();
+
+    void login();
 }
