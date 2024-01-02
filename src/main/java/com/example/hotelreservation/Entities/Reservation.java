@@ -2,33 +2,30 @@ package com.example.hotelreservation.Entities;
 
 public class Reservation implements IEntity{
 
-    private String ID;
-    private Customer customer;
-    private Room room;
-    private Hotel hotel;
+    private int ID;
+    private int customerID;
+    private int roomID;
+    private int hotelID;
     private String checkInDate;
     private String checkOutDate;
-    private int totalDays;
 
-    public Reservation(String ID, Customer customer, Room room, Hotel hotel, String checkInDate,
-                       String checkOutDate,int totalDays) {
+    public Reservation(int ID, int customerID, int roomID, int hotelID, String checkInDate, String checkOutDate) {
         this.ID = ID;
-        this.customer = customer;
-        this.room = room;
-        this.hotel = hotel;
+        this.customerID = customerID;
+        this.roomID = roomID;
+        this.hotelID = hotelID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
-        this.totalDays = totalDays;
     }
 
     @Override
     public String getValues() {
-        return "'"+this.ID+"'"+","+"'"+this.customer+"'"+","+"'"+this.room+"'"+","+
-                "'"+this.hotel+"'"+","+"'"+this.checkInDate+"'"+","+"'"+this.checkOutDate+"'"+this.totalDays+"'";
+        return this.ID+","+this.customerID+","+this.roomID+","+this.hotelID+","+"'"+this.checkInDate+"'"+","+
+                "'"+this.checkOutDate+"'";
     }
 
     @Override
     public String getColumns() {
-        return "ID,customer,room,hotel,checkInDate,checkOutDate,totalDays";
+        return "ID,customerID,roomID,hotelID,checkInDate,checkOutDate";
     }
 }
