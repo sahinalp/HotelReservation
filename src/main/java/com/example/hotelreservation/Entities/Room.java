@@ -3,7 +3,7 @@ package com.example.hotelreservation.Entities;
 public class Room implements IEntity{
     private int ID;
     private int hotelID;
-    private RoomTypes type;
+    private String type;
     private Boolean isFull;
     private String facilities;
     private String description;
@@ -12,7 +12,11 @@ public class Room implements IEntity{
     private String currency;
     private Double price;
 
-    public Room(int ID, int hotelID, RoomTypes type, Boolean isFull, String facilities, String description,
+    public Room()
+    {
+
+    }
+    public Room(int ID, int hotelID, String type, Boolean isFull, String facilities, String description,
                 String photo, int roomSize, String currency, Double price) {
         this.ID = ID;
         this.hotelID = hotelID;
@@ -35,6 +39,6 @@ public class Room implements IEntity{
 
     @Override
     public String getColumns() {
-        return "ID,hotelID,type,isFull,facilities,description,photo,roomSize,currency,price";
+        return "\"ID\", \"hotelID\", \"type\", \"isFull\", facilities, description, photo, \"roomSize\", currency, price";
     }
 }

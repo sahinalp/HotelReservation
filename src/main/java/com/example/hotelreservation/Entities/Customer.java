@@ -35,6 +35,6 @@ public class Customer implements IEntity{
 
     @Override
     public String getColumns() {
-        return "ID,username,password,mail,name,surname,identificationNumber,birthDate,phone,gender";
+        return "\"ID\", username, \"password\", mail, \"name\", surname, \"identificationNumber\", \"birthDate\", phone, gender";
     }
 }

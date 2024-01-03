@@ -26,6 +26,6 @@ public class Reservation implements IEntity{
 
     @Override
     public String getColumns() {
-        return "ID,customerID,roomID,hotelID,checkInDate,checkOutDate";
+        return "\"ID\", \"customerID\", \"roomID\", \"hotelID\", \"checkInDate\", \"checkOutDate\"";
     }
 }

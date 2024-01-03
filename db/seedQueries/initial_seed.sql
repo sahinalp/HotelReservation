@@ -15,7 +15,7 @@ CREATE TABLE "HotelApp".hotel (
 "ID" INTEGER PRIMARY KEY,
 "name" VARCHAR(30),
 "address" TEXT,
-"website" VARCHAR(30),
+"website" VARCHAR(50),
 "telNo" VARCHAR(15),
 "fax" VARCHAR(15),
 "rank" REAL
@@ -216,3 +216,7 @@ Clothes rack',
 'Offering free toiletries, this double room includes a private bathroom with a shower, a bidet and a hairdryer. The double room offers air conditioning, soundproof walls, a minibar, a wardrobe, as well as a flat-screen TV with satellite channels.',
 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/500109165.jpg?k=96bd09ae5614fe30fd5a7871d77ca3a19116e6e6dd58b496a44258309cb8c72a&o=',
 21, 'TL', 2929);
+
+INSERT INTO "HotelApp".customer
+("ID", username, "password", mail, "name", surname, "identificationNumber", "birthDate", phone, gender)
+VALUES(1, 'alp', '123456', 'alp@alp.com', 'Alp', 'Akosman', '12345678901', '03/03/1998', '+905551234567', 1);

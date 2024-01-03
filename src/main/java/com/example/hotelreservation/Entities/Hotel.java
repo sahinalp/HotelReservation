@@ -29,6 +29,6 @@ public class Hotel implements IEntity{
 
     @Override
     public String getColumns() {
-        return "ID,name,address,website,telNo,fax,rank";
+        return "\"ID\", \"name\", address, website, \"telNo\", fax, \"rank\"";
     }
 }
