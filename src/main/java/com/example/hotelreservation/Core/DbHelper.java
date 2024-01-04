@@ -75,4 +75,42 @@ public class DbHelper {
         statement.close();
         return roomsArrayList;
     }
+    public ResultSet getEntity(Connection connection,String tableName, IEntity I) throws SQLException {
+        ResultSet resultSet;
+        Statement statement=connection.createStatement();
+        resultSet = statement.executeQuery("SELECT "+
+                I.getColumns()+" FROM \"HotelApp\"."+tableName+";");
+        return resultSet;
+    }
+    public ResultSet getEntity(Connection connection,String tableName, IEntity I, int ID) throws SQLException {
+        ResultSet resultSet;
+        Statement statement=connection.createStatement();
+        resultSet = statement.executeQuery("SELECT "+
+                I.getColumns()+" FROM \"HotelApp\"."+tableName+
+                " WHERE \"ID\"="+ID+";");
+        return resultSet;
+    }
+    public ResultSet getEntity(Connection connection,String tableName, IEntity I,String column, String text) throws SQLException {
+        ResultSet resultSet;
+        Statement statement=connection.createStatement();
+        resultSet = statement.executeQuery("SELECT "+
+                I.getColumns()+" FROM \"HotelApp\"."+tableName+
+                " WHERE \""+column+"\"= '%"+text+"%' ;");
+        return resultSet;
+    }
+    public ResultSet getEntity(Connection connection,String tableName, IEntity I, Double minPrice,Double maxPrice) throws SQLException {
+        ResultSet resultSet;
+        Statement statement=connection.createStatement();
+        resultSet = statement.executeQuery("SELECT "+
+                I.getColumns()+" FROM \"HotelApp\"."+tableName+
+                " WHERE \"price\">= "+minPrice+" and \"price\"< "+maxPrice+";");
+        return resultSet;
+    }
+    public ResultSet getEntity(Connection connection,String tableName, IEntity I, String script) throws SQLException {
+        ResultSet resultSet;
+        Statement statement=connection.createStatement();
+        resultSet = statement.executeQuery("SELECT "+
+                I.getColumns()+" FROM \"HotelApp\"."+tableName+" "+script+";");
+        return resultSet;
+    }
 }
