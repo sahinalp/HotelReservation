@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Maven: org.junit.jupiter:junit-jupiter-engine:5.9.2">
+    <archive path="C:/Users/pc/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.2/junit-jupiter-engine-5.9.2.jar" />
+  </library>
+  <library name="Maven: org.junit.platform:junit-platform-engine:1.9.2">
+    <archive path="C:/Users/pc/.m2/repository/org/junit/platform/junit-platform-engine/1.9.2/junit-platform-engine-1.9.2.jar" />
+  </library>
+  <library name="Maven: org.junit.platform:junit-platform-commons:1.9.2">
+    <archive path="C:/Users/pc/.m2/repository/org/junit/platform/junit-platform-commons/1.9.2/junit-platform-commons-1.9.2.jar" />
+  </library>
+  <library name="Maven: org.apiguardian:apiguardian-api:1.1.2">
+    <archive path="C:/Users/pc/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar" />
+  </library>
+  <library name="Maven: org.junit.jupiter:junit-jupiter-api:5.9.2">
+    <archive path="C:/Users/pc/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.2/junit-jupiter-api-5.9.2.jar" />
+  </library>
+  <library name="Maven: org.opentest4j:opentest4j:1.2.0">
+    <archive path="C:/Users/pc/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-fxml:win:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-fxml/20.0.1/javafx-fxml-20.0.1-win.jar" />
+  </library>
+  <library name="Maven: com.dlsc.formsfx:formsfx-core:11.6.0">
+    <archive path="C:/Users/pc/.m2/repository/com/dlsc/formsfx/formsfx-core/11.6.0/formsfx-core-11.6.0.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-base:win:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-base/20.0.1/javafx-base-20.0.1-win.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-fxml:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-fxml/20.0.1/javafx-fxml-20.0.1.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-graphics:win:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-graphics/20.0.1/javafx-graphics-20.0.1-win.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-base:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-base/20.0.1/javafx-base-20.0.1.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-controls:win:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-controls/20.0.1/javafx-controls-20.0.1-win.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-graphics:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-graphics/20.0.1/javafx-graphics-20.0.1.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-controls:20.0.1">
+    <archive path="C:/Users/pc/.m2/repository/org/openjfx/javafx-controls/20.0.1/javafx-controls-20.0.1.jar" />
+  </library>
+  <library name="Maven: org.checkerframework:checker-qual:3.31.0">
+    <archive path="C:/Users/pc/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar" />
+  </library>
+  <library name="Maven: org.postgresql:postgresql:42.6.0">
+    <archive path="C:/Users/pc/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar" />
+  </library>
+</eclipse-userlibraries>
+
