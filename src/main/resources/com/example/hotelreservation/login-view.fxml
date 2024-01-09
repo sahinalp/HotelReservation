@@ -12,6 +12,6 @@
   <Label fx:id="welcomeText" />
    <TextField promptText="Username" />
    <TextField promptText="Password" />
-   <Button mnemonicParsing="false" text="Exit" />
   <Button onAction="#onHelloButtonClick" text="Login" />
+   <Button mnemonicParsing="false" text="Exit" />
 </VBox>
