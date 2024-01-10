@@ -12,6 +12,9 @@ public class Customer implements IEntity{
     private String phone;
     private  int gender;
 
+    public Customer() {
+
+    }
     public Customer(int ID, String username, String password, String mail, String name,
                     String surname, String identificationNumber, String birthDate, String phone, int gender) {
         this.ID = ID;
@@ -24,6 +27,15 @@ public class Customer implements IEntity{
         this.birthDate = birthDate;
         this.phone = phone;
         this.gender = gender;
+    }
+
+    public boolean isCustomer(String _username, String _password)
+    {
+        if((this.username.contentEquals(_username)) && (this.password.contentEquals(_password)))
+        {
+            return true;
+        }
+        return false;
     }
 
     @Override

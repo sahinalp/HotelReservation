@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.Home">
+<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.Home">
    <Label text="Hotel Reservation" />
    <Label layoutX="622.0" layoutY="40.0" text="Room Type" />
    <ChoiceBox layoutX="696.0" layoutY="36.0" prefWidth="150.0" />

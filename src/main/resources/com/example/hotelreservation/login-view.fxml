@@ -4,14 +4,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
+<VBox alignment="CENTER" prefHeight="196.0" prefWidth="189.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
+   <TextField fx:id="username" promptText="Username" />
+   <TextField fx:id="password" promptText="Password" />
+  <Button onAction="#onHelloButtonClick" text="Login" />
+   <Button mnemonicParsing="false" prefHeight="11.0" prefWidth="138.0" text="Continue without login" />
+   <Button mnemonicParsing="false" text="Exit" />
+   <Hyperlink text="Can't login?" />
+   <Hyperlink text="Create account" />
 
   <Label fx:id="welcomeText" />
-   <TextField promptText="Username" />
-   <TextField promptText="Password" />
-  <Button onAction="#onHelloButtonClick" text="Login" />
-   <Button mnemonicParsing="false" text="Exit" />
 </VBox>
