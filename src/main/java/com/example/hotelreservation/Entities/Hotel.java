@@ -20,6 +20,38 @@ public class Hotel implements IEntity{
         this.rank = rank;
     }
 
+    public Hotel() {
+
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public String getTelNo() {
+        return telNo;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public Double getRank() {
+        return rank;
+    }
+
     @Override
     public String getValues() {
         return this.ID+","+"'"+this.name+"'"+","+"'"+this.address+"'"+","+

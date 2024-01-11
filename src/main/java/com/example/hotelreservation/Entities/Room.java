@@ -41,4 +41,44 @@ public class Room implements IEntity{
     public String getColumns() {
         return "\"ID\", \"hotelID\", \"type\", \"isFull\", facilities, description, photo, \"roomSize\", currency, price";
     }
+
+    public int getHotelID() {
+        return hotelID;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Boolean getFull() {
+        return isFull;
+    }
+
+    public String getFacilities() {
+        return facilities;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public int getRoomSize() {
+        return roomSize;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
 }

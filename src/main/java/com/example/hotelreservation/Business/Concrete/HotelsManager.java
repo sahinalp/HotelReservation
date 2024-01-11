@@ -2,10 +2,7 @@ package com.example.hotelreservation.Business.Concrete;
 
 import com.example.hotelreservation.Business.Abstract.IHotelsManager;
 import com.example.hotelreservation.Core.DbHelper;
-import com.example.hotelreservation.Entities.Customer;
-import com.example.hotelreservation.Entities.HotelRoom;
-import com.example.hotelreservation.Entities.Reservation;
-import com.example.hotelreservation.Entities.Room;
+import com.example.hotelreservation.Entities.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -48,7 +45,53 @@ public class HotelsManager implements IHotelsManager {
     }
 
     @Override
-    public void getRoom() {
+    public Room getRoom(DbHelper dbHelper,Connection connection, int ID) {
+        ResultSet resultSet;
+        Room room = new Room();
+        Hotel hotel = new Hotel();
+        try {
+            resultSet=dbHelper.getEntity(connection,"room",room,ID);
+            resultSet.next();
+            room = new Room(
+                    resultSet.getInt(1),
+                    resultSet.getInt(2),
+                    resultSet.getString(3),
+                    resultSet.getBoolean(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getInt(8),
+                    resultSet.getString(9),
+                    resultSet.getDouble(10)
+            );
+            resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return room;
+
+    }
+    @Override
+    public Hotel getHotel(DbHelper dbHelper,Connection connection, int ID) {
+        ResultSet resultSet;
+        Hotel hotel = new Hotel();
+        try {
+            resultSet=dbHelper.getEntity(connection,"hotel",hotel,ID);
+            resultSet.next();
+            hotel = new Hotel(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getDouble(7)
+            );
+            resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return hotel;
 
     }
 }
