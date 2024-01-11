@@ -1,4 +1,4 @@
-module com.example.otelreservation {
+module com.example.hotelreservation {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -6,5 +6,7 @@ module com.example.otelreservation {
     requires java.sql;
 
     opens com.example.hotelreservation to javafx.fxml;
+    opens com.example.hotelreservation.Entities to javafx.fxml;
     exports com.example.hotelreservation;
+    exports com.example.hotelreservation.Entities;
 }

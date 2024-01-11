@@ -50,30 +50,31 @@ public class DbHelper {
         preparedStatement.close();
         return result;
     }
-    public ArrayList<Room> getListOfRooms(Connection connection, IEntity I) throws SQLException {
+    public ResultSet getListOfRooms(Connection connection,String script) throws SQLException {
         ResultSet resultSet;
         Statement statement=connection.createStatement();
-        resultSet = statement.executeQuery("SELECT "+
-                I.getColumns()+" FROM \"HotelApp\".room;");
+        resultSet = statement.executeQuery("select r.\"ID\" , h.\"name\" , r.\"type\" ,\n" +
+                "h.address, h.\"rank\" , r.price , r.currency\n" +
+                "FROM \"HotelApp\".room as r\n" +
+                "inner join \"HotelApp\".hotel h on r.\"hotelID\" = h.\"ID\""+script+" ;");
 
-        ArrayList<Room> roomsArrayList = new ArrayList<Room>();
-        while (resultSet.next())
-        {
-            roomsArrayList.add(new Room(
-                    resultSet.getInt(1),
-                    resultSet.getInt(2),
-                    resultSet.getString(3),
-                    resultSet.getBoolean(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6),
-                    resultSet.getString(7),
-                    resultSet.getInt(8),
-                    resultSet.getString(9),
-                    resultSet.getDouble(10)
-            ));
-        }
-        statement.close();
-        return roomsArrayList;
+//        ArrayList<Room> roomsArrayList = new ArrayList<Room>();
+//        while (resultSet.next())
+//        {
+//            roomsArrayList.add(new Room(
+//                    resultSet.getInt(1),
+//                    resultSet.getInt(2),
+//                    resultSet.getString(3),
+//                    resultSet.getBoolean(4),
+//                    resultSet.getString(5),
+//                    resultSet.getString(6),
+//                    resultSet.getString(7),
+//                    resultSet.getInt(8),
+//                    resultSet.getString(9),
+//                    resultSet.getDouble(10)
+//            ));
+//        }
+        return resultSet;
     }
     public ResultSet getEntity(Connection connection,String tableName, IEntity I) throws SQLException {
         ResultSet resultSet;
