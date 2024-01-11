@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class HotelReservationApplication extends Application {
     public static Connection connection;
     public static DbHelper dbHelper;
+
+    public static boolean isLoggedIn =false;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));

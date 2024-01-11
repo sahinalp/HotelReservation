@@ -48,7 +48,6 @@ public class HotelsManager implements IHotelsManager {
     public Room getRoom(DbHelper dbHelper,Connection connection, int ID) {
         ResultSet resultSet;
         Room room = new Room();
-        Hotel hotel = new Hotel();
         try {
             resultSet=dbHelper.getEntity(connection,"room",room,ID);
             resultSet.next();

@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
+<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" onMouseEntered="#stageShowEvent" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
    <Label text="Hotel Reservation" />
    <Label fx:id="label1" layoutX="622.0" layoutY="77.0" text="Room Type" />
    <ChoiceBox fx:id="roomTypeChoiceBox" layoutX="696.0" layoutY="73.0" prefWidth="150.0" />
@@ -15,7 +15,6 @@
    <Label fx:id="label4" layoutX="75.0" layoutY="54.0" text="Şehir" />
    <ChoiceBox fx:id="currency" layoutX="501.0" layoutY="73.0" prefHeight="25.0" prefWidth="38.0" />
    <Label fx:id="label5" layoutX="653.0" layoutY="112.0" text="Sırala" />
-   <ChoiceBox fx:id="order" layoutX="696.0" layoutY="108.0" prefWidth="150.0" />
    <TableView fx:id="roomListTable" layoutX="58.0" layoutY="178.0" onMouseClicked="#getItem" prefHeight="357.0" prefWidth="798.0">
      <columns>
          <TableColumn fx:id="roomID" prefWidth="75.0" text="ID" visible="false" />
@@ -29,12 +28,18 @@
    <TextField fx:id="city" layoutX="113.0" layoutY="50.0" prefHeight="25.0" prefWidth="174.0" />
    <Slider fx:id="slider" layoutX="387.0" layoutY="48.0" prefHeight="14.0" prefWidth="150.0" />
    <TextField fx:id="price" layoutX="384.0" layoutY="73.0" prefHeight="25.0" prefWidth="114.0" />
-   <SplitMenuButton fx:id="userMenu" layoutX="751.0" layoutY="17.0" mnemonicParsing="false" text="Kullanıcı Adı">
+   <SplitMenuButton fx:id="userMenu" layoutX="696.0" layoutY="17.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Kullanıcı Adı">
      <items>
        <MenuItem mnemonicParsing="false" text="Action 1" />
        <MenuItem mnemonicParsing="false" text="Action 2" />
      </items>
    </SplitMenuButton>
+    <SplitMenuButton fx:id="order" layoutX="696.0" layoutY="108.0" mnemonicParsing="false" prefWidth="150.0" text="">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+    </SplitMenuButton>
    <Button fx:id="refresh" layoutX="795.0" layoutY="153.0" mnemonicParsing="false" onAction="#onRefreshButtonClick" prefHeight="25.0" prefWidth="61.0" text="Refresh" />
    <ImageView fx:id="roomImageReserve" disable="true" fitHeight="359.0" fitWidth="376.0" layoutX="59.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    <Button fx:id="reserveButton" disable="true" layoutX="724.0" layoutY="539.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Reserve" visible="false" />

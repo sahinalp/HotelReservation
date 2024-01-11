@@ -5,6 +5,7 @@ import com.example.hotelreservation.Core.DbHelper;
 import com.example.hotelreservation.Entities.Customer;
 import com.example.hotelreservation.Entities.IEntity;
 import com.example.hotelreservation.Entities.Room;
+import com.example.hotelreservation.HotelReservationController;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -50,6 +51,7 @@ public class CustomerManager implements ICustomerService {
 
         if(customer.isCustomer(username,password))
         {
+            HotelReservationController.setCustomer(customer);
             return true;
         }
         return false;

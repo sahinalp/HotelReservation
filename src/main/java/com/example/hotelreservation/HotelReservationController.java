@@ -3,11 +3,16 @@ package com.example.hotelreservation;
 import com.example.hotelreservation.Business.Concrete.CustomerManager;
 import com.example.hotelreservation.Business.Concrete.HotelsManager;
 import com.example.hotelreservation.Core.DbHelper;
+import com.example.hotelreservation.Entities.Customer;
 import com.example.hotelreservation.Entities.Hotel;
 import com.example.hotelreservation.Entities.HotelRoom;
 import com.example.hotelreservation.Entities.Room;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,9 +24,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static javafx.scene.image.Image.*;
 
@@ -49,7 +58,7 @@ public class HotelReservationController {
     @FXML
     private TableColumn<HotelRoom,String> priceCurrency;
 
-    ObservableList<HotelRoom> list = FXCollections.observableArrayList();
+    ObservableList<HotelRoom> list;
 
     @FXML
     private Label label1;
@@ -70,7 +79,7 @@ public class HotelReservationController {
     @FXML
     private ChoiceBox currency;
     @FXML
-    private ChoiceBox order;
+    private SplitMenuButton order;
     @FXML
     private TextField city;
     @FXML
@@ -106,8 +115,11 @@ public class HotelReservationController {
     @FXML
     private TextArea addressReserve;
     int index;
+    private boolean isStageShowEventRun = false;
     CustomerManager customerManager = new CustomerManager();
     HotelsManager hotelsManager = new HotelsManager();
+
+    private static Customer customer;
 
     @FXML
     protected void onHelloButtonClick() throws IOException {
@@ -123,7 +135,10 @@ public class HotelReservationController {
             Scene scene = new Scene(fxmlLoader.load(), 894, 604);
             stage.setTitle("Login");
             stage.setScene(scene);
+            HotelReservationApplication.isLoggedIn=true;
             stage.show();
+//            Platform.runLater(() -> this.stageShowEvent());
+
         }
         else
         {
@@ -137,6 +152,7 @@ public class HotelReservationController {
     protected void onRefreshButtonClick() throws IOException
     {
         ArrayList<HotelRoom> roomsArrayList;
+        list = FXCollections.observableArrayList();
         roomsArrayList=hotelsManager.getAllRooms(HotelReservationApplication.dbHelper,HotelReservationApplication.connection,
                 "");
         for (HotelRoom room: roomsArrayList)
@@ -164,7 +180,6 @@ public class HotelReservationController {
             return;
         }
 
-//        System.out.println(hotelName.getCellData(index)+" "+ address.getCellData(index));
         Room room = hotelsManager.getRoom(HotelReservationApplication.dbHelper,HotelReservationApplication.connection,
                 roomID.getCellData(index));
         Hotel hotel = hotelsManager.getHotel(HotelReservationApplication.dbHelper,HotelReservationApplication.connection,
@@ -267,5 +282,22 @@ public class HotelReservationController {
             addressReserve.setVisible(false);
             backReserve.setVisible(false);
         }
+    }
+    @FXML
+    private void stageShowEvent()
+    {
+        if(!isStageShowEventRun) {
+            isStageShowEventRun=true;
+            try {
+                this.onRefreshButtonClick();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            userMenu.setText(customer.getName() + " "+ customer.getSurname());
+        }
+    }
+    public static void setCustomer(Customer _customer)
+    {
+        customer=_customer;
     }
 }
