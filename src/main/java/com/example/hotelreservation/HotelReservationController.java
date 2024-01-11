@@ -2,37 +2,24 @@ package com.example.hotelreservation;
 
 import com.example.hotelreservation.Business.Concrete.CustomerManager;
 import com.example.hotelreservation.Business.Concrete.HotelsManager;
-import com.example.hotelreservation.Core.DbHelper;
 import com.example.hotelreservation.Entities.Customer;
 import com.example.hotelreservation.Entities.Hotel;
 import com.example.hotelreservation.Entities.HotelRoom;
 import com.example.hotelreservation.Entities.Room;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
+import com.example.hotelreservation.Entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import static javafx.scene.image.Image.*;
+import java.util.UUID;
 
 public class HotelReservationController {
     private int menu = 1;
@@ -44,19 +31,47 @@ public class HotelReservationController {
     private TextField password;
 
     @FXML
+    private TextField usernameRegister;
+
+    @FXML
+    private TextField name;
+
+    @FXML
+    private TextField surname;
+
+    @FXML
+    private TextField mail;
+
+    @FXML
+    private TextField phone;
+
+    @FXML
+    private TextField identityNumber;
+
+    @FXML
+    private TextField birthday;
+
+    @FXML
+    private  TextField passwordAgain;
+
+    @FXML
+    private SplitMenuButton genderMenu;
+
+
+    @FXML
     private TableView<HotelRoom> roomListTable;
     @FXML
     private TableColumn<HotelRoom, Integer> roomID;
     @FXML
-    private TableColumn<HotelRoom,String> hotelName;
+    private TableColumn<HotelRoom, String> hotelName;
     @FXML
-    private TableColumn<HotelRoom,String> roomType;
+    private TableColumn<HotelRoom, String> roomType;
     @FXML
-    private TableColumn<HotelRoom,String> address;
+    private TableColumn<HotelRoom, String> address;
     @FXML
-    private TableColumn<HotelRoom,Double> hotelRank;
+    private TableColumn<HotelRoom, Double> hotelRank;
     @FXML
-    private TableColumn<HotelRoom,String> priceCurrency;
+    private TableColumn<HotelRoom, String> priceCurrency;
 
     ObservableList<HotelRoom> list;
 
@@ -118,45 +133,90 @@ public class HotelReservationController {
     private boolean isStageShowEventRun = false;
     CustomerManager customerManager = new CustomerManager();
     HotelsManager hotelsManager = new HotelsManager();
+    Stage login = new Stage();
+    Stage home = new Stage();
+    Stage register = new Stage();
 
     private static Customer customer;
 
     @FXML
     protected void onHelloButtonClick() throws IOException {
 
-        boolean canLogin=false;
-        canLogin=customerManager.login(HotelReservationApplication.dbHelper,HotelReservationApplication.connection,
-                username.getText(),password.getText());
+        boolean canLogin = false;
+        canLogin = customerManager.login(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
+                username.getText(), password.getText());
 
-        if (canLogin)
-        {
-            Stage stage = new Stage();
+        if (canLogin) {
+
             FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 894, 604);
-            stage.setTitle("Login");
-            stage.setScene(scene);
+            home.setTitle("Login");
+            home.setScene(scene);
             HotelReservationApplication.isLoggedIn=true;
-            stage.show();
+            login.hide();
+            home.show();
 //            Platform.runLater(() -> this.stageShowEvent());
 
-        }
-        else
-        {
+        } else {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("Hata!!");
             a.setHeaderText("Hatalı şifre");
             a.show();
         }
     }
+
     @FXML
-    protected void onRefreshButtonClick() throws IOException
-    {
+    protected void onSignUp() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("register.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load());
+            register.setTitle("Register");
+            register.setScene(scene);
+            login.hide();
+            register.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @FXML
+    protected void changeGender() throws IOException{
+
+        //genderMenu.setText();
+    }
+
+    @FXML
+    protected void onSignUpComplete() throws IOException {
+        //int uniqueID = Integer.parseInt(UUID.randomUUID().toString());
+        int genderValue = 0;
+        if (genderMenu.getText().equals(GenderTypes.Woman.name())) {
+            genderValue = 1;
+        } else if (genderMenu.getText().equals(GenderTypes.Man.name())) {
+            genderValue = 2;
+        }
+        Customer customer = new Customer(20, usernameRegister.getText(), password.getText(), mail.getText(), name.getText(),
+                surname.getText(), identityNumber.getText(), birthday.getText(), phone.getText(), genderValue);
+        customerManager.register(HotelReservationApplication.dbHelper, HotelReservationApplication.connection, customer);
+
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 894, 604);
+        stage.setTitle("Login");
+        stage.setScene(scene);
+        register.close();
+        stage.show();
+
+    }
+
+    @FXML
+    protected void onRefreshButtonClick() throws IOException {
         ArrayList<HotelRoom> roomsArrayList;
         list = FXCollections.observableArrayList();
-        roomsArrayList=hotelsManager.getAllRooms(HotelReservationApplication.dbHelper,HotelReservationApplication.connection,
+        roomsArrayList = hotelsManager.getAllRooms(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
                 "");
-        for (HotelRoom room: roomsArrayList)
-        {
+        for (HotelRoom room : roomsArrayList) {
 //            roomListTable.getItems().add(room.hotelName,room.roomType,room.address,room.hotelRank,price);
 //            list.add(new HotelRoom(room.roomID,room.hotelName,room.roomType,room.address,room.hotelRank,room.priceCurrency));
             list.add(room);
@@ -171,18 +231,18 @@ public class HotelReservationController {
         roomListTable.setItems(list);
 
     }
+
     @FXML
-    protected void getItem()
-    {
-        index=roomListTable.getSelectionModel().getSelectedIndex();
-        if(index<=-1)
-        {
+    protected void getItem() {
+        index = roomListTable.getSelectionModel().getSelectedIndex();
+        if (index <= -1) {
             return;
         }
 
-        Room room = hotelsManager.getRoom(HotelReservationApplication.dbHelper,HotelReservationApplication.connection,
+//        System.out.println(hotelName.getCellData(index)+" "+ address.getCellData(index));
+        Room room = hotelsManager.getRoom(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
                 roomID.getCellData(index));
-        Hotel hotel = hotelsManager.getHotel(HotelReservationApplication.dbHelper,HotelReservationApplication.connection,
+        Hotel hotel = hotelsManager.getHotel(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
                 room.getHotelID());
 
         changeMenu();
@@ -201,12 +261,11 @@ public class HotelReservationController {
 
 
     }
+
     @FXML
-    private void changeMenu()
-    {
-        if(menu==1)
-        {
-            menu=2;
+    private void changeMenu() {
+        if (menu == 1) {
+            menu = 2;
             label1.setVisible(false);
             label2.setVisible(false);
             label3.setVisible(false);
@@ -249,10 +308,8 @@ public class HotelReservationController {
             addressReserve.setDisable(false);
             backReserve.setDisable(false);
 
-        }
-        else
-        {
-            menu=1;
+        } else {
+            menu = 1;
             label1.setVisible(true);
             label2.setVisible(true);
             label3.setVisible(true);

@@ -15,8 +15,13 @@ import java.util.ArrayList;
 public class CustomerManager implements ICustomerService {
 
     @Override
-    public void register() {
+    public void register(DbHelper dbHelper,Connection connection, Customer customer) {
 
+        try {
+            dbHelper.insert(connection,"customer",customer);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

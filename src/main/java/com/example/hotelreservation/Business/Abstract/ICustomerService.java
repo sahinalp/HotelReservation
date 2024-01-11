@@ -1,12 +1,13 @@
 package com.example.hotelreservation.Business.Abstract;
 
 import com.example.hotelreservation.Core.DbHelper;
+import com.example.hotelreservation.Entities.Customer;
 
 import java.sql.Connection;
 
 public interface ICustomerService {
 
-    void register();
+    void register(DbHelper dbHelper,Connection connection, Customer customer);
 
     void updateInfo();
 
