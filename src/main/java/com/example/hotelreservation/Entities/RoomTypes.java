@@ -5,5 +5,6 @@ public enum RoomTypes {
     TwinRoom,
     Triple,
     Quad,
-    Suite
+    Suite,
+    King
 }

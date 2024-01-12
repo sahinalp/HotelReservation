@@ -28,6 +28,7 @@ import java.util.Properties;
 
 public class HotelReservationController {
     public Label errorText;
+    public SplitMenuButton roomTypeMenu;
     private int menu = 1;
     @FXML
     private Label welcomeText;
@@ -553,4 +554,36 @@ public class HotelReservationController {
     public static void setCustomer(Customer _customer) {
         customer = _customer;
     }
+
+    @FXML
+    protected void onSuiteClick() {
+        roomTypeMenu.setText(RoomTypes.Suite.name());
+    }
+
+    @FXML
+    protected void onKingSizeClick() {
+        roomTypeMenu.setText(RoomTypes.King.name());
+    }
+
+    @FXML
+    protected void onQuadSizeClick() {
+        roomTypeMenu.setText(RoomTypes.Quad.name());
+    }
+
+    @FXML
+    protected void onTripleSizeClick() {
+        roomTypeMenu.setText(RoomTypes.Triple.name());
+    }
+
+    @FXML
+    protected void onOnePersonRoomSizeClick() {
+        roomTypeMenu.setText(RoomTypes.OnePersonRoom.name());
+    }
+
+    @FXML
+    protected void onTwinRoomSizeClick() {
+        roomTypeMenu.setText(RoomTypes.TwinRoom.name());
+    }
+
+
 }
