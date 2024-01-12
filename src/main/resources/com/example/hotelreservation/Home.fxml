@@ -21,14 +21,14 @@
    <TableView fx:id="roomListTable" layoutX="55.0" layoutY="188.0" onMouseClicked="#getItem" prefHeight="357.0" prefWidth="798.0">
      <columns>
          <TableColumn fx:id="roomID" prefWidth="75.0" text="ID" visible="false" />
-       <TableColumn fx:id="hotelName" prefWidth="106.0" text="Hotel Name" />
-       <TableColumn fx:id="roomType" prefWidth="114.0" text="Type" />
-         <TableColumn fx:id="address" prefWidth="126.0" text="Address" />
-         <TableColumn fx:id="hotelRank" prefWidth="75.0" text="Rank" />
-         <TableColumn fx:id="priceCurrency" prefWidth="124.0" text="Price" />
+       <TableColumn fx:id="hotelName" prefWidth="181.0" text="Hotel Name" />
+       <TableColumn fx:id="roomType" prefWidth="125.0" text="Type" />
+         <TableColumn fx:id="address" prefWidth="293.0" text="Address" />
+         <TableColumn fx:id="hotelRank" minWidth="0.0" prefWidth="91.0" text="Rank" />
+         <TableColumn fx:id="priceCurrency" prefWidth="107.0" text="Price" />
      </columns>
    </TableView>
-   <TextField fx:id="city" layoutX="113.0" layoutY="50.0" prefHeight="25.0" prefWidth="174.0" />
+   <TextField fx:id="city" layoutX="113.0" layoutY="50.0" onKeyTyped="#searchCity" prefHeight="25.0" prefWidth="174.0" />
    <Slider fx:id="slider" layoutX="387.0" layoutY="48.0" prefHeight="14.0" prefWidth="150.0" />
    <TextField fx:id="price" layoutX="384.0" layoutY="73.0" prefHeight="25.0" prefWidth="114.0" promptText="Price" />
    <SplitMenuButton fx:id="userMenu" layoutX="691.0" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="User">

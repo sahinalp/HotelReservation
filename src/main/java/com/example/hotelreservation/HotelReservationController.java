@@ -82,7 +82,8 @@ public class HotelReservationController {
     @FXML
     private TableColumn<HotelRoom, String> priceCurrency;
 
-    ObservableList<HotelRoom> list;
+    ObservableList<HotelRoom> list = null;
+    ArrayList<HotelRoom> roomsArrayList=null;
 
     @FXML
     private Label label1;
@@ -409,7 +410,6 @@ public class HotelReservationController {
 
     @FXML
     protected void onRefreshButtonClick() throws IOException {
-        ArrayList<HotelRoom> roomsArrayList;
         list = FXCollections.observableArrayList();
         roomsArrayList = hotelsManager.getAllRooms(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
                 "");
@@ -456,6 +456,43 @@ public class HotelReservationController {
         rankReserve.setText(String.valueOf(hotel.getRank()));
         addressReserve.setText(hotel.getAddress());
 
+
+    }
+    @FXML
+    protected void searchCity()
+    {
+        list = FXCollections.observableArrayList();
+        String cityText = city.getText();
+        if(roomsArrayList!=null && !cityText.equals(""))
+        {
+            cityText= cityText.toLowerCase().substring(0,1).toUpperCase()+
+                    cityText.toLowerCase().substring(1).toLowerCase();
+            for (HotelRoom room : roomsArrayList) {
+
+                String[] city = room.getAddress().split(",");
+                if(city[city.length-2].contains(cityText))
+                {
+                    list.add(room);
+                }
+            }
+
+        }
+        else if(roomsArrayList!=null) {
+            for (HotelRoom room : roomsArrayList) {
+
+                if (room.getAddress().contains(cityText)) {
+                    list.add(room);
+                }
+            }
+        }
+        roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
+        hotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
+        roomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        hotelRank.setCellValueFactory(new PropertyValueFactory<>("hotelRank"));
+        priceCurrency.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
+
+        roomListTable.setItems(list);
 
     }
 
