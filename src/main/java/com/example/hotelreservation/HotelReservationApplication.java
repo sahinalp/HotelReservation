@@ -17,16 +17,18 @@ import java.util.ArrayList;
 public class HotelReservationApplication extends Application {
     public static Connection connection;
     public static DbHelper dbHelper;
+//    static Stage stage;
 
     public static boolean isLoggedIn =false;
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage _stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 200, 368);
-        stage.setTitle("Login");
-        stage.setScene(scene);
+        Scene scene = new Scene(fxmlLoader.load(), 287, 382);
+        HotelReservationController.stage = new Stage();
+        HotelReservationController.stage.setTitle("Login");
+        HotelReservationController.stage.setScene(scene);
 
-        stage.show();
+        HotelReservationController.stage.show();
 
     }
 

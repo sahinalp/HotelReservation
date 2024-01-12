@@ -37,7 +37,7 @@ public class DbHelper {
         return DriverManager.getConnection(dbConnectionUrl, dbUserName, dbPassword);
     }
     public int insert(Connection connection, String tableName, IEntity I) throws SQLException {
-        preparedStatement=connection.prepareStatement("insert into "+tableName+" (" +
+        preparedStatement=connection.prepareStatement("insert into \"HotelApp\"."+tableName+" (" +
                 I.getColumns()+") values("+ I.getValues()+")");
         int result=  preparedStatement.executeUpdate();
         preparedStatement.close();

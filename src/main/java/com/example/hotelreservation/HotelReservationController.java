@@ -17,9 +17,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+//import javax.mail.*;
+//import javax.mail.internet.*;
+
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
+import java.util.Properties;
 
 public class HotelReservationController {
     private int menu = 1;
@@ -32,30 +37,32 @@ public class HotelReservationController {
 
     @FXML
     private TextField usernameRegister;
-
     @FXML
-    private TextField name;
-
+    private TextField nameRegister;
     @FXML
-    private TextField surname;
-
+    private TextField surnameRegister;
     @FXML
-    private TextField mail;
-
+    private TextField mailRegister;
     @FXML
-    private TextField phone;
-
+    private TextField phoneRegister;
     @FXML
-    private TextField identityNumber;
-
+    private TextField identityNumberRegister;
     @FXML
-    private TextField birthday;
-
+    private TextField birthdayRegister;
     @FXML
-    private  TextField passwordAgain;
-
+    private  TextField passwordRegister;
     @FXML
-    private SplitMenuButton genderMenu;
+    private  TextField passwordAgainRegister;
+    @FXML
+    private SplitMenuButton genderMenuRegister;
+    @FXML
+    private Button backRegister;
+    @FXML
+    private MenuItem womanRegister;
+    @FXML
+    private MenuItem manRegister;
+    @FXML
+    private MenuItem otherRegister;
 
 
     @FXML
@@ -133,11 +140,14 @@ public class HotelReservationController {
     private boolean isStageShowEventRun = false;
     CustomerManager customerManager = new CustomerManager();
     HotelsManager hotelsManager = new HotelsManager();
-    Stage login = new Stage();
+    static Stage stage;
     Stage home = new Stage();
     Stage register = new Stage();
 
     private static Customer customer;
+
+    private String mailSenderMail=null;
+    private String mailSenderPassword=null;
 
     @FXML
     protected void onHelloButtonClick() throws IOException {
@@ -150,12 +160,15 @@ public class HotelReservationController {
 
             FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 894, 604);
-            home.setTitle("Login");
-            home.setScene(scene);
+            stage.setTitle("Login");
+            stage.setScene(scene);
+
+
             HotelReservationApplication.isLoggedIn=true;
-            login.hide();
-            home.show();
+            stage.centerOnScreen();
+            stage.show();
 //            Platform.runLater(() -> this.stageShowEvent());
+
 
         } else {
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -170,10 +183,11 @@ public class HotelReservationController {
         FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("register.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load());
-            register.setTitle("Register");
-            register.setScene(scene);
-            login.hide();
-            register.show();
+            stage.setTitle("Register");
+            stage.setScene(scene);
+
+            stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,32 +196,116 @@ public class HotelReservationController {
     }
 
     @FXML
-    protected void changeGender() throws IOException{
+    protected void changeGender1() throws IOException{
 
-        //genderMenu.setText();
+        genderMenuRegister.setText("Woman");
+    }
+    @FXML
+    protected void changeGender2() throws IOException{
+
+        genderMenuRegister.setText("Man");
+    }
+    @FXML
+    protected void changeGender3() throws IOException{
+
+        genderMenuRegister.setText("Other");
     }
 
     @FXML
     protected void onSignUpComplete() throws IOException {
         //int uniqueID = Integer.parseInt(UUID.randomUUID().toString());
-        int genderValue = 0;
-        if (genderMenu.getText().equals(GenderTypes.Woman.name())) {
+        int genderValue = 2;
+        if (genderMenuRegister.getText().equals(GenderTypes.Woman.name())) {
+            genderValue = 0;
+        } else if (genderMenuRegister.getText().equals(GenderTypes.Man.name())) {
             genderValue = 1;
-        } else if (genderMenu.getText().equals(GenderTypes.Man.name())) {
-            genderValue = 2;
         }
-        Customer customer = new Customer(20, usernameRegister.getText(), password.getText(), mail.getText(), name.getText(),
-                surname.getText(), identityNumber.getText(), birthday.getText(), phone.getText(), genderValue);
-        customerManager.register(HotelReservationApplication.dbHelper, HotelReservationApplication.connection, customer);
+        int id=customerManager.getTotalUser(HotelReservationApplication.dbHelper, HotelReservationApplication.connection);
+        id++;
+        if(passwordRegister.getText().contentEquals(passwordAgainRegister.getText())) {
+            Customer customer = new Customer(id, usernameRegister.getText(), passwordRegister.getText(), mailRegister.getText(), nameRegister.getText(),
+                    surnameRegister.getText(), identityNumberRegister.getText(), birthdayRegister.getText(), phoneRegister.getText(), genderValue);
+            int result = customerManager.register(HotelReservationApplication.dbHelper, HotelReservationApplication.connection, customer);
+            if (result == 1) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("");
+                a.setHeaderText("Kaydınız yapılmıştır. Hoşgeldiniz " + customer.getUsername());
+                a.show();
+                FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 287, 382);
+                stage.setTitle("Login");
+                stage.setScene(scene);
 
-        Stage stage = new Stage();
+                stage.show();
+            } else {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setTitle("");
+                a.setHeaderText("Kaydınız yapılamadı, lütfen daha sonra tekrar deneyin ");
+                a.show();
+            }
+        }
+        else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("");
+            a.setHeaderText("Girdiğiniz şifreler uyuşmuyor");
+            a.show();
+        }
+//        Stage stage = new Stage();
+
+
+    }
+    protected void sendMail()
+    {
+//        stage.setTitle("Email sender");
+//        stage.setScene(scene);
+//        stage.show();
+
+        try {
+            FileInputStream file = new FileInputStream("src/main/resources/com/example/hotelreservation/database.config");
+            Properties prop = new Properties();
+            prop.load(file);
+            mailSenderMail=prop.getProperty("mailSender-mail");
+            mailSenderPassword=prop.getProperty("mailSender-password");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if(mailSenderMail!=null && mailSenderPassword!=null)
+        {
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com"); // Use your email provider's SMTP server
+            props.put("mail.smtp.port", "587"); // Use the appropriate port
+//            Session session = Session.getInstance(props, new Authenticator() {
+//                protected PasswordAuthentication getPasswordAuthentication() {
+//                    return new PasswordAuthentication(username, password);
+//                }
+//            });
+//            try {
+//                Message message = new MimeMessage(session);
+//                message.setFrom(new InternetAddress(customer.getUsername()));
+//                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(customer.getMail())));
+//                message.setSubject("Subject of the email");
+//                message.setText("Body of the email");
+//
+//                Transport.send(message);
+//
+//                System.out.println("Email sent successfully!");
+//
+//            } catch (MessagingException e) {
+//                e.printStackTrace();
+//            }
+        }
+    }
+
+    @FXML
+    protected void onBackRegister() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 894, 604);
+        Scene scene = new Scene(fxmlLoader.load(), 287, 382);
         stage.setTitle("Login");
         stage.setScene(scene);
-        register.close();
-        stage.show();
 
+        stage.show();
     }
 
     @FXML

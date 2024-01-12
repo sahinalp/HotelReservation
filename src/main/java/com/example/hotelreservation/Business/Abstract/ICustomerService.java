@@ -7,7 +7,8 @@ import java.sql.Connection;
 
 public interface ICustomerService {
 
-    void register(DbHelper dbHelper,Connection connection, Customer customer);
+    int register(DbHelper dbHelper,Connection connection, Customer customer);
+    int getTotalUser(DbHelper dbHelper,Connection connection);
 
     void updateInfo();
 

@@ -13,26 +13,26 @@
   <Label fx:id="welcomeText" />
    <Pane prefHeight="392.0" prefWidth="209.0">
       <children>
-         <Button alignment="BOTTOM_RIGHT" contentDisplay="TOP" layoutX="191.0" layoutY="266.0" mnemonicParsing="false" style="-fx-background-color: firebrick;" text="EXIT" textFill="WHITE">
-            <font>
-               <Font name="System Bold" size="12.0" />
-            </font>
-         </Button>
-         <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="214.0" style="-fx-background-color: transparant;" text="Don't have an account?" />
-         <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="216.0" onAction="#onSignUp" text="Sign Up" textFill="DODGERBLUE">
-            <font>
-               <Font name="Times New Roman Bold" size="12.0" />
-            </font>
-         </Hyperlink>
+         <TextField fx:id="username" layoutX="47.0" layoutY="62.0" promptText="Username" />
+         <TextField fx:id="password" layoutX="47.0" layoutY="99.0" promptText="Password" />
         <Button layoutX="91.0" layoutY="139.0" onAction="#onHelloButtonClick" style="-fx-background-color: dodgerblue;" text="SIGN IN" textFill="WHITE">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
          </Button>
          <Button graphicTextGap="0.0" layoutX="47.0" layoutY="178.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: transparant;" text="Continue without login" />
-         <TextField fx:id="password" layoutX="47.0" layoutY="99.0" promptText="Password" />
-         <TextField fx:id="username" layoutX="47.0" layoutY="62.0" promptText="Username" />
-         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="7.0" prefHeight="27.0" prefWidth="167.0" text="HELLO" textAlignment="CENTER" textFill="DODGERBLUE">
+         <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="203.0" style="-fx-background-color: transparant;" text="Can't sign in?" />
+         <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="226.0" onAction="#onSignUp" text="Create Account" textFill="DODGERBLUE">
+            <font>
+               <Font name="Times New Roman Bold" size="12.0" />
+            </font>
+         </Hyperlink>
+         <Button alignment="BOTTOM_RIGHT" contentDisplay="TOP" layoutX="191.0" layoutY="266.0" mnemonicParsing="false" style="-fx-background-color: firebrick;" text="EXIT" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="-16.0" prefHeight="65.0" prefWidth="167.0" text="HOTEL RESERVATION APP" textAlignment="CENTER" textFill="DODGERBLUE" wrapText="true">
             <font>
                <Font name="System Bold" size="18.0" />
             </font>

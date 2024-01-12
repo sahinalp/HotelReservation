@@ -6,25 +6,27 @@
 
 <AnchorPane minHeight="382.0" minWidth="287.0" prefHeight="382.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
    <children>
-      <Button defaultButton="true" layoutX="111.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSignUpComplete" style="-fx-background-color: dodgerblue;" text="Sign Up" textFill="WHITE">
+      <TextField fx:id="nameRegister" layoutX="54.0" layoutY="14.0" promptText="Name" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="surnameRegister" layoutX="54.0" layoutY="48.0" promptText="Surname" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="usernameRegister" layoutX="54.0" layoutY="83.0" promptText="Username" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="identityNumberRegister" layoutX="54.0" layoutY="117.0" promptText="Identification Number" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="birthdayRegister" layoutX="54.0" layoutY="149.0" promptText="Birthday" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="phoneRegister" layoutX="54.0" layoutY="179.0" promptText="Phone" AnchorPane.rightAnchor="70.0" />
+      <SplitMenuButton fx:id="genderMenuRegister" layoutX="124.0" layoutY="211.0" mnemonicParsing="false" text="Woman" AnchorPane.rightAnchor="70.0">
+        <items>
+          <MenuItem fx:id="womanRegister" mnemonicParsing="false" onAction="#changeGender1" text="Woman" />
+          <MenuItem fx:id="manRegister" mnemonicParsing="false" onAction="#changeGender2" text="Man" />
+          <MenuItem fx:id="otherRegister" mnemonicParsing="false" onAction="#changeGender3" text="Prefer Not to Say" />
+        </items>
+      </SplitMenuButton>
+      <TextField fx:id="mailRegister" layoutX="54.0" layoutY="244.0" promptText="Mail" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="passwordRegister" layoutX="54.0" layoutY="276.0" promptText="Password" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="passwordAgainRegister" layoutX="54.0" layoutY="307.0" promptText="Password again" AnchorPane.rightAnchor="70.0" />
+      <Button defaultButton="true" layoutX="111.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSignUpComplete" style="-fx-background-color: dodgerblue;" text="Sign Up" textFill="WHITE" AnchorPane.rightAnchor="70.0">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font></Button>
-      <TextField fx:id="identityNumber" layoutX="54.0" layoutY="117.0" promptText="Identification Number" />
-      <TextField fx:id="birthday" layoutX="54.0" layoutY="149.0" promptText="Birthday" />
-      <TextField fx:id="phone" layoutX="54.0" layoutY="179.0" promptText="Phone" />
-      <TextField fx:id="mail" layoutX="54.0" layoutY="244.0" promptText="Mail" />
-      <TextField fx:id="name" layoutX="54.0" layoutY="14.0" promptText="Name" />
-      <TextField fx:id="surname" layoutX="54.0" layoutY="48.0" promptText="Surname" />
-      <TextField fx:id="password" layoutX="54.0" layoutY="276.0" promptText="Password" />
-      <TextField fx:id="usernameRegister" layoutX="54.0" layoutY="83.0" promptText="Username" />
-      <TextField fx:id="passwordAgain" layoutX="54.0" layoutY="307.0" promptText="Password again" />
-      <SplitMenuButton fx:id="genderMenu" layoutX="124.0" layoutY="211.0" mnemonicParsing="false" onAction="#changeGender" text="Gender">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Woman" />
-          <MenuItem mnemonicParsing="false" text="Man" />
-          <MenuItem mnemonicParsing="false" text="Prefer Not to Say" />
-        </items>
-      </SplitMenuButton>
+      <Button fx:id="backRegister" layoutY="14.0" mnemonicParsing="false" onAction="#onBackRegister" text="Geri" />
+      <Label layoutX="90.0" layoutY="211.0" prefHeight="25.0" prefWidth="56.0" text="Gender" />
    </children>
 </AnchorPane>

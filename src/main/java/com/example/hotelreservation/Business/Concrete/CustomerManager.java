@@ -3,6 +3,7 @@ package com.example.hotelreservation.Business.Concrete;
 import com.example.hotelreservation.Business.Abstract.ICustomerService;
 import com.example.hotelreservation.Core.DbHelper;
 import com.example.hotelreservation.Entities.Customer;
+import com.example.hotelreservation.Entities.HotelRoom;
 import com.example.hotelreservation.Entities.IEntity;
 import com.example.hotelreservation.Entities.Room;
 import com.example.hotelreservation.HotelReservationController;
@@ -15,13 +16,32 @@ import java.util.ArrayList;
 public class CustomerManager implements ICustomerService {
 
     @Override
-    public void register(DbHelper dbHelper,Connection connection, Customer customer) {
-
+    public int register(DbHelper dbHelper,Connection connection, Customer customer) {
+        int result;
         try {
-            dbHelper.insert(connection,"customer",customer);
+            result=dbHelper.insert(connection,"customer",customer);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return result;
+    }
+    public int getTotalUser(DbHelper dbHelper,Connection connection)
+    {
+        ResultSet resultSet;
+        Customer customer = new Customer();
+        int count=0;
+        try {
+            resultSet=dbHelper.getEntity(connection,"customer",customer);
+
+            while (resultSet.next())
+            {
+                count++;
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return count;
     }
 
     @Override
