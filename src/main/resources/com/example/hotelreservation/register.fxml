@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="382.0" minWidth="287.0" prefHeight="382.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
+<AnchorPane minHeight="382.0" minWidth="287.0" prefHeight="420.0" prefWidth="328.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
    <children>
       <TextField fx:id="nameRegister" layoutX="54.0" layoutY="14.0" promptText="Name" AnchorPane.rightAnchor="70.0" />
       <TextField fx:id="surnameRegister" layoutX="54.0" layoutY="48.0" promptText="Surname" AnchorPane.rightAnchor="70.0" />
@@ -22,11 +22,21 @@
       <TextField fx:id="mailRegister" layoutX="54.0" layoutY="244.0" promptText="Mail" AnchorPane.rightAnchor="70.0" />
       <TextField fx:id="passwordRegister" layoutX="54.0" layoutY="276.0" promptText="Password" AnchorPane.rightAnchor="70.0" />
       <TextField fx:id="passwordAgainRegister" layoutX="54.0" layoutY="307.0" promptText="Password again" AnchorPane.rightAnchor="70.0" />
-      <Button defaultButton="true" layoutX="111.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSignUpComplete" style="-fx-background-color: dodgerblue;" text="Sign Up" textFill="WHITE" AnchorPane.rightAnchor="70.0">
+      <Button defaultButton="true" layoutX="192.0" layoutY="346.0" mnemonicParsing="false" onAction="#onSignUpComplete" style="-fx-background-color: dodgerblue;" text="Sign Up" textFill="WHITE" AnchorPane.rightAnchor="70.0">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font></Button>
-      <Button fx:id="backRegister" layoutY="14.0" mnemonicParsing="false" onAction="#onBackRegister" text="Geri" />
-      <Label layoutX="90.0" layoutY="211.0" prefHeight="25.0" prefWidth="56.0" text="Gender" />
+      <Button fx:id="backRegister" layoutY="-1.0" mnemonicParsing="false" onAction="#onBackRegister" style="-fx-background-color: transparant;" text="&lt;- Geri" textFill="DODGERBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label layoutX="109.0" layoutY="211.0" prefHeight="25.0" prefWidth="56.0" text="Gender" />
+      <Label fx:id="errorText" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="381.0" minHeight="25.0" minWidth="311.0" prefHeight="25.0" prefWidth="311.0" text="Label" textFill="#f81010" visible="false" />
+      <Label layoutX="260.0" layoutY="20.0" text="*" textFill="#ee0b0b" />
+      <Label layoutX="260.0" layoutY="52.0" text="*" textFill="#ee0b0b" />
+      <Label layoutX="260.0" layoutY="87.0" text="*" textFill="#ee0b0b" />
+      <Label layoutX="260.0" layoutY="280.0" text="*" textFill="#ee0b0b" />
+      <Label layoutX="260.0" layoutY="248.0" text="*" textFill="#ee0b0b" />
+      <Label layoutX="260.0" layoutY="314.0" text="*" textFill="#ee0b0b" />
    </children>
 </AnchorPane>

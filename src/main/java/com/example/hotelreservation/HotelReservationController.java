@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class HotelReservationController {
+    public Label errorText;
     private int menu = 1;
     @FXML
     private Label welcomeText;
@@ -50,9 +51,9 @@ public class HotelReservationController {
     @FXML
     private TextField birthdayRegister;
     @FXML
-    private  TextField passwordRegister;
+    private TextField passwordRegister;
     @FXML
-    private  TextField passwordAgainRegister;
+    private TextField passwordAgainRegister;
     @FXML
     private SplitMenuButton genderMenuRegister;
     @FXML
@@ -146,8 +147,8 @@ public class HotelReservationController {
 
     private static Customer customer;
 
-    private String mailSenderMail=null;
-    private String mailSenderPassword=null;
+    private String mailSenderMail = null;
+    private String mailSenderPassword = null;
 
     @FXML
     protected void onHelloButtonClick() throws IOException {
@@ -164,7 +165,7 @@ public class HotelReservationController {
             stage.setScene(scene);
 
 
-            HotelReservationApplication.isLoggedIn=true;
+            HotelReservationApplication.isLoggedIn = true;
             stage.centerOnScreen();
             stage.show();
 //            Platform.runLater(() -> this.stageShowEvent());
@@ -189,73 +190,81 @@ public class HotelReservationController {
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
 
 
     }
 
     @FXML
-    protected void changeGender1() throws IOException{
+    protected void changeGender1() throws IOException {
 
         genderMenuRegister.setText("Woman");
     }
+
     @FXML
-    protected void changeGender2() throws IOException{
+    protected void changeGender2() throws IOException {
 
         genderMenuRegister.setText("Man");
     }
+
     @FXML
-    protected void changeGender3() throws IOException{
+    protected void changeGender3() throws IOException {
 
         genderMenuRegister.setText("Other");
     }
 
     @FXML
     protected void onSignUpComplete() throws IOException {
-        //int uniqueID = Integer.parseInt(UUID.randomUUID().toString());
         int genderValue = 2;
         if (genderMenuRegister.getText().equals(GenderTypes.Woman.name())) {
             genderValue = 0;
         } else if (genderMenuRegister.getText().equals(GenderTypes.Man.name())) {
             genderValue = 1;
         }
-        int id=customerManager.getTotalUser(HotelReservationApplication.dbHelper, HotelReservationApplication.connection);
-        id++;
-        if(passwordRegister.getText().contentEquals(passwordAgainRegister.getText())) {
-            Customer customer = new Customer(id, usernameRegister.getText(), passwordRegister.getText(), mailRegister.getText(), nameRegister.getText(),
-                    surnameRegister.getText(), identityNumberRegister.getText(), birthdayRegister.getText(), phoneRegister.getText(), genderValue);
-            int result = customerManager.register(HotelReservationApplication.dbHelper, HotelReservationApplication.connection, customer);
-            if (result == 1) {
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setTitle("");
-                a.setHeaderText("Kaydınız yapılmıştır. Hoşgeldiniz " + customer.getUsername());
-                a.show();
-                FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 287, 382);
-                stage.setTitle("Login");
-                stage.setScene(scene);
+        if (usernameRegister.getText() == null || nameRegister.getText() == null || surnameRegister.getText() == null || mailRegister.getText() == null || usernameRegister.getText() == null || passwordRegister.getText().isEmpty()
+        ||passwordRegister.getText()==null ||passwordAgainRegister.getText().isEmpty() ||passwordAgainRegister.getText()==null || usernameRegister.getText().isEmpty() || mailRegister.getText().isEmpty() || nameRegister.getText().isEmpty() || surnameRegister.getText().isEmpty()) {
+            errorText.setVisible(true);
+            errorText.setText("Lütfen yıldızlı alanları doldurunuz.");
+        } else {
+            errorText.setVisible(false);
+            int id = customerManager.getTotalUser(HotelReservationApplication.dbHelper, HotelReservationApplication.connection);
+            id++;
+            if (passwordRegister.getText().contentEquals(passwordAgainRegister.getText())) {
+                Customer customer = new Customer(id, usernameRegister.getText(), passwordRegister.getText(), mailRegister.getText(), nameRegister.getText(),
+                        surnameRegister.getText(), identityNumberRegister.getText(), birthdayRegister.getText(), phoneRegister.getText(), genderValue);
+                int result = customerManager.register(HotelReservationApplication.dbHelper, HotelReservationApplication.connection, customer);
+                if (result == 1) {
+                    Alert a = new Alert(Alert.AlertType.INFORMATION);
+                    a.setTitle("");
+                    a.setHeaderText("Kaydınız yapılmıştır. Hoşgeldiniz " + customer.getUsername());
+                    a.show();
+                    FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 287, 382);
+                    stage.setTitle("Login");
+                    stage.setScene(scene);
 
-                stage.show();
+                    stage.show();
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("");
+                    a.setHeaderText("Kaydınız yapılamadı, lütfen daha sonra tekrar deneyin ");
+                    a.show();
+                }
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setTitle("");
-                a.setHeaderText("Kaydınız yapılamadı, lütfen daha sonra tekrar deneyin ");
+                a.setHeaderText("Girdiğiniz şifreler uyuşmuyor");
                 a.show();
             }
         }
-        else {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("");
-            a.setHeaderText("Girdiğiniz şifreler uyuşmuyor");
-            a.show();
-        }
+
 //        Stage stage = new Stage();
 
 
     }
-    protected void sendMail()
-    {
+
+    protected void sendMail() {
 //        stage.setTitle("Email sender");
 //        stage.setScene(scene);
 //        stage.show();
@@ -264,13 +273,12 @@ public class HotelReservationController {
             FileInputStream file = new FileInputStream("src/main/resources/com/example/hotelreservation/database.config");
             Properties prop = new Properties();
             prop.load(file);
-            mailSenderMail=prop.getProperty("mailSender-mail");
-            mailSenderPassword=prop.getProperty("mailSender-password");
+            mailSenderMail = prop.getProperty("mailSender-mail");
+            mailSenderPassword = prop.getProperty("mailSender-password");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if(mailSenderMail!=null && mailSenderPassword!=null)
-        {
+        if (mailSenderMail != null && mailSenderPassword != null) {
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
@@ -307,90 +315,90 @@ public class HotelReservationController {
 
         stage.show();
     }
+
     @FXML
-    protected void onSortHotelNameAscending()
-    {
+    protected void onSortHotelNameAscending() {
         hotelName.setSortType(TableColumn.SortType.ASCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(hotelName);
         roomListTable.sort();
         order.setText("Hotel Name Ascending");
     }
+
     @FXML
-    protected void onSortHotelNameDescending()
-    {
+    protected void onSortHotelNameDescending() {
         hotelName.setSortType(TableColumn.SortType.DESCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(hotelName);
         roomListTable.sort();
         order.setText("Hotel Name Descending");
     }
+
     @FXML
-    protected void onRoomTypeAscending()
-    {
+    protected void onRoomTypeAscending() {
         roomType.setSortType(TableColumn.SortType.ASCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(roomType);
         roomListTable.sort();
         order.setText("Room Type Ascending");
     }
+
     @FXML
-    protected void onRoomTypeNameDescending()
-    {
+    protected void onRoomTypeNameDescending() {
         roomType.setSortType(TableColumn.SortType.DESCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(roomType);
         roomListTable.sort();
         order.setText("Room Type Descending");
     }
+
     @FXML
-    protected void onAddressAscending()
-    {
+    protected void onAddressAscending() {
         address.setSortType(TableColumn.SortType.ASCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(address);
         roomListTable.sort();
         order.setText("Address Ascending");
     }
+
     @FXML
-    protected void onAddressDescending()
-    {
+    protected void onAddressDescending() {
         address.setSortType(TableColumn.SortType.DESCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(address);
         roomListTable.sort();
         order.setText("Address Descending");
     }
+
     @FXML
-    protected void onSortHotelRankAscending()
-    {
+    protected void onSortHotelRankAscending() {
         hotelRank.setSortType(TableColumn.SortType.ASCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(hotelRank);
         roomListTable.sort();
         order.setText("Rank Ascending");
     }
+
     @FXML
-    protected void onSortHotelRankDescending()
-    {
+    protected void onSortHotelRankDescending() {
         hotelRank.setSortType(TableColumn.SortType.DESCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(hotelRank);
         roomListTable.sort();
         order.setText("Rank Descending");
     }
+
     @FXML
-    protected void onSortPriceCurrencyAscending()
-    {
+    protected void onSortPriceCurrencyAscending() {
         priceCurrency.setSortType(TableColumn.SortType.ASCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(priceCurrency);
         roomListTable.sort();
         order.setText("Price Ascending");
     }
+
     @FXML
-    protected void onSortPriceCurrencyDescending()
-    {
+    protected void onSortPriceCurrencyDescending() {
         priceCurrency.setSortType(TableColumn.SortType.DESCENDING);
         roomListTable.getSortOrder().clear();
         roomListTable.getSortOrder().add(priceCurrency);
@@ -528,21 +536,21 @@ public class HotelReservationController {
             backReserve.setVisible(false);
         }
     }
+
     @FXML
-    private void stageShowEvent()
-    {
-        if(!isStageShowEventRun) {
-            isStageShowEventRun=true;
+    private void stageShowEvent() {
+        if (!isStageShowEventRun) {
+            isStageShowEventRun = true;
             try {
                 this.onRefreshButtonClick();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            userMenu.setText(customer.getName() + " "+ customer.getSurname());
+            userMenu.setText(customer.getName() + " " + customer.getSurname());
         }
     }
-    public static void setCustomer(Customer _customer)
-    {
-        customer=_customer;
+
+    public static void setCustomer(Customer _customer) {
+        customer = _customer;
     }
 }
