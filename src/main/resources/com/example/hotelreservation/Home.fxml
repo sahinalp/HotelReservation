@@ -34,10 +34,18 @@
        <MenuItem mnemonicParsing="false" text="Action 2" />
      </items>
    </SplitMenuButton>
-    <SplitMenuButton fx:id="order" layoutX="696.0" layoutY="108.0" mnemonicParsing="false" prefWidth="150.0" text="">
+    <SplitMenuButton fx:id="order" layoutX="696.0" layoutY="108.0" mnemonicParsing="false" prefWidth="150.0" text="Hotel Name Ascending">
         <items>
-            <MenuItem mnemonicParsing="false" text="Action 1" />
-            <MenuItem mnemonicParsing="false" text="Action 2" />
+            <MenuItem fx:id="order1" mnemonicParsing="false" onAction="#onSortHotelNameAscending" text="Hotel Name Ascending" />
+            <MenuItem fx:id="order2" mnemonicParsing="false" onAction="#onSortHotelNameDescending" text="Hotel Name Descending" />
+         <MenuItem fx:id="order3" mnemonicParsing="false" onAction="#onRoomTypeAscending" text="Room Type Ascending" />
+         <MenuItem fx:id="order4" mnemonicParsing="false" onAction="#onRoomTypeNameDescending" text="Room Type Descending" />
+         <MenuItem fx:id="order5" mnemonicParsing="false" onAction="#onAddressAscending" text="Address Ascending" />
+         <MenuItem fx:id="order6" mnemonicParsing="false" onAction="#onAddressDescending" text="Address Descending" />
+         <MenuItem fx:id="order7" mnemonicParsing="false" onAction="#onSortHotelRankAscending" text="Rank Ascending" />
+         <MenuItem fx:id="order8" mnemonicParsing="false" onAction="#onSortHotelRankDescending" text="Rank Descending" />
+         <MenuItem fx:id="order9" mnemonicParsing="false" onAction="#onSortPriceCurrencyAscending" text="Price Ascending" />
+         <MenuItem fx:id="order10" mnemonicParsing="false" onAction="#onSortPriceCurrencyDescending" text="Price Descending" />
         </items>
     </SplitMenuButton>
    <Button fx:id="refresh" layoutX="795.0" layoutY="153.0" mnemonicParsing="false" onAction="#onRefreshButtonClick" prefHeight="25.0" prefWidth="61.0" text="Refresh" />

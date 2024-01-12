@@ -307,6 +307,96 @@ public class HotelReservationController {
 
         stage.show();
     }
+    @FXML
+    protected void onSortHotelNameAscending()
+    {
+        hotelName.setSortType(TableColumn.SortType.ASCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(hotelName);
+        roomListTable.sort();
+        order.setText("Hotel Name Ascending");
+    }
+    @FXML
+    protected void onSortHotelNameDescending()
+    {
+        hotelName.setSortType(TableColumn.SortType.DESCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(hotelName);
+        roomListTable.sort();
+        order.setText("Hotel Name Descending");
+    }
+    @FXML
+    protected void onRoomTypeAscending()
+    {
+        roomType.setSortType(TableColumn.SortType.ASCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(roomType);
+        roomListTable.sort();
+        order.setText("Room Type Ascending");
+    }
+    @FXML
+    protected void onRoomTypeNameDescending()
+    {
+        roomType.setSortType(TableColumn.SortType.DESCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(roomType);
+        roomListTable.sort();
+        order.setText("Room Type Descending");
+    }
+    @FXML
+    protected void onAddressAscending()
+    {
+        address.setSortType(TableColumn.SortType.ASCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(address);
+        roomListTable.sort();
+        order.setText("Address Ascending");
+    }
+    @FXML
+    protected void onAddressDescending()
+    {
+        address.setSortType(TableColumn.SortType.DESCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(address);
+        roomListTable.sort();
+        order.setText("Address Descending");
+    }
+    @FXML
+    protected void onSortHotelRankAscending()
+    {
+        hotelRank.setSortType(TableColumn.SortType.ASCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(hotelRank);
+        roomListTable.sort();
+        order.setText("Rank Ascending");
+    }
+    @FXML
+    protected void onSortHotelRankDescending()
+    {
+        hotelRank.setSortType(TableColumn.SortType.DESCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(hotelRank);
+        roomListTable.sort();
+        order.setText("Rank Descending");
+    }
+    @FXML
+    protected void onSortPriceCurrencyAscending()
+    {
+        priceCurrency.setSortType(TableColumn.SortType.ASCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(priceCurrency);
+        roomListTable.sort();
+        order.setText("Price Ascending");
+    }
+    @FXML
+    protected void onSortPriceCurrencyDescending()
+    {
+        priceCurrency.setSortType(TableColumn.SortType.DESCENDING);
+        roomListTable.getSortOrder().clear();
+        roomListTable.getSortOrder().add(priceCurrency);
+        roomListTable.sort();
+        order.setText("Price Descending");
+    }
 
     @FXML
     protected void onRefreshButtonClick() throws IOException {
