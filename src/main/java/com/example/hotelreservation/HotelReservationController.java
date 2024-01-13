@@ -29,6 +29,7 @@ import java.util.Properties;
 public class HotelReservationController {
     public Label errorText;
     public SplitMenuButton roomTypeMenu;
+
     private int menu = 1;
     @FXML
     private Label welcomeText;
@@ -112,7 +113,9 @@ public class HotelReservationController {
     @FXML
     private TextField price;
     @FXML
-    private SplitMenuButton userMenu;
+    private MenuButton userMenu;
+    @FXML
+    private Button userLogin;
     @FXML
     private Button refresh;
     @FXML
@@ -139,8 +142,28 @@ public class HotelReservationController {
     private TextField rankReserve;
     @FXML
     private TextArea addressReserve;
+
+    @FXML
+    private TextField usernameUserInfo;
+    @FXML
+    private TextField passwordUserInfo;
+    @FXML
+    private TextField mailUserInfo;
+    @FXML
+    private TextField nameUserInfo;
+    @FXML
+    private TextField surnameUserInfo;
+    @FXML
+    private TextField identificationNumberUserInfo;
+    @FXML
+    private TextField birthDateUserInfo;
+    @FXML
+    private TextField phoneUserInfo;
+    @FXML
+    private TextField genderUserInfo;
+
     int index;
-    private boolean isStageShowEventRun = false;
+    private static boolean isStageShowEventRun = false;
     CustomerManager customerManager = new CustomerManager();
     HotelsManager hotelsManager = new HotelsManager();
     static Stage stage;
@@ -162,16 +185,16 @@ public class HotelReservationController {
                 username.getText(), password.getText());
 
         if (canLogin) {
-
             FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 894, 604);
-            stage.setTitle("Login");
+            stage.setTitle("Hotel Reservation");
             stage.setScene(scene);
 
 
             HotelReservationApplication.isLoggedIn = true;
             stage.centerOnScreen();
             stage.show();
+
 //            Platform.runLater(() -> this.stageShowEvent());
 
 
@@ -181,6 +204,17 @@ public class HotelReservationController {
             a.setHeaderText("Hatalı şifre");
             a.show();
         }
+    }
+    @FXML
+    protected void onContinueWithoutLogin() throws IOException {
+        HotelReservationApplication.isLoggedIn = false;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 894, 604);
+        stage.setTitle("Hotel Reservation");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     @FXML
@@ -416,8 +450,6 @@ public class HotelReservationController {
         roomsArrayList = hotelsManager.getAllRooms(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
                 "");
         for (HotelRoom room : roomsArrayList) {
-//            roomListTable.getItems().add(room.hotelName,room.roomType,room.address,room.hotelRank,price);
-//            list.add(new HotelRoom(room.roomID,room.hotelName,room.roomType,room.address,room.hotelRank,room.priceCurrency));
             list.add(room);
         }
         roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
@@ -475,7 +507,6 @@ public class HotelReservationController {
             label3.setVisible(false);
             label4.setVisible(false);
             label5.setVisible(false);
-            roomTypeChoiceBox.setVisible(false);
             checkinDate.setVisible(false);
             checkoutDate.setVisible(false);
             currency.setVisible(false);
@@ -512,6 +543,14 @@ public class HotelReservationController {
             addressReserve.setDisable(false);
             backReserve.setDisable(false);
 
+
+            userLogin.setVisible(false);
+            userLogin.setDisable(true);
+            userMenu.setVisible(false);
+            userMenu.setDisable(true);
+            roomTypeMenu.setVisible(false);
+
+
         } else {
             menu = 1;
             label1.setVisible(true);
@@ -519,7 +558,6 @@ public class HotelReservationController {
             label3.setVisible(true);
             label4.setVisible(true);
             label5.setVisible(true);
-            roomTypeChoiceBox.setVisible(true);
             checkinDate.setVisible(true);
             checkoutDate.setVisible(true);
             currency.setVisible(true);
@@ -528,7 +566,6 @@ public class HotelReservationController {
             city.setVisible(true);
             slider.setVisible(true);
             price.setVisible(true);
-            userMenu.setVisible(true);
             refresh.setVisible(true);
             roomImageReserve.setVisible(false);
             reserveButton.setVisible(false);
@@ -542,6 +579,22 @@ public class HotelReservationController {
             rankReserve.setVisible(false);
             addressReserve.setVisible(false);
             backReserve.setVisible(false);
+
+            roomTypeMenu.setVisible(true);
+
+            if(customer!=null) {
+                userLogin.setVisible(false);
+                userLogin.setDisable(true);
+                userMenu.setVisible(true);
+                userMenu.setDisable(false);
+            }
+            else
+            {
+                userLogin.setVisible(true);
+                userLogin.setDisable(false);
+                userMenu.setVisible(false);
+                userMenu.setDisable(true);
+            }
         }
     }
 
@@ -554,12 +607,48 @@ public class HotelReservationController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            userMenu.setText(customer.getName() + " " + customer.getSurname());
+            if(customer!=null) {
+                userMenu.setText(customer.getName() + " " + customer.getSurname());
+                userLogin.setVisible(false);
+                userLogin.setDisable(true);
+                userMenu.setVisible(true);
+                userMenu.setDisable(false);
+
+            }
+
+        }
+    }
+    @FXML
+    protected void stageShowEventUserInfo()
+    {
+        if (!isStageShowEventRun) {
+            isStageShowEventRun = true;
+            if(customer!=null) {
+
+                usernameUserInfo.setText(customer.getUsername());
+                passwordUserInfo.setText(customer.getPassword());
+                mailUserInfo.setText(customer.getMail());
+                nameUserInfo.setText(customer.getName());
+                surnameUserInfo.setText(customer.getSurname());
+                identificationNumberUserInfo.setText(customer.getIdentificationNumber());
+                birthDateUserInfo.setText(customer.getBirthDate());
+                phoneUserInfo.setText(customer.getPhone());
+                String gender = "Other";
+                if(customer.getGender()==0)
+                    gender="Woman";
+                else if(customer.getGender()==1)
+                    gender="Man";
+                genderUserInfo.setText(gender);
+
+
+            }
+
         }
     }
 
     public static void setCustomer(Customer _customer) {
         customer = _customer;
+        isStageShowEventRun=false;
     }
     @FXML
     protected void onAllSizeClick(){
@@ -667,6 +756,73 @@ public class HotelReservationController {
         priceCurrency.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
 
         roomListTable.setItems(list);
+    }
+
+    @FXML
+    protected void onUserMenu1()
+    {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("UserInfo.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 453, 604);
+            stage.setTitle("Hotel Reservation");
+            stage.setScene(scene);
+
+            stage.centerOnScreen();
+            stage.show();
+            isStageShowEventRun=false;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    protected void onUserMenu2()
+    {
+        HotelReservationApplication.isLoggedIn = false;
+        userMenu.setVisible(false);
+        userMenu.setDisable(true);
+        userLogin.setVisible(true);
+        userLogin.setDisable(false);
+        customer=null;
+    }
+    @FXML
+    protected void onUserLogin()
+    {
+        isStageShowEventRun=false;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 287, 382);
+            stage.setTitle("Hotel Reservation");
+            stage.setScene(scene);
+
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    protected void onbackHome()
+    {
+        isStageShowEventRun=false;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 894, 604);
+            stage.setTitle("Hotel Reservation");
+            stage.setScene(scene);
+
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    @FXML
+    protected void onSaveUserInfo()
+    {
+
     }
 
 }

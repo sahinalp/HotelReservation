@@ -31,8 +31,13 @@
    </TableView>
    <Slider fx:id="slider" layoutX="387.0" layoutY="48.0" prefHeight="14.0" prefWidth="150.0" />
    <TextField fx:id="price" layoutX="384.0" layoutY="73.0" prefHeight="25.0" prefWidth="114.0" promptText="Price" />
-   <SplitMenuButton fx:id="userMenu" alignment="CENTER" layoutX="691.0" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="User">
-   </SplitMenuButton>
+    <Button fx:id="userLogin" alignment="CENTER" layoutX="691.0" layoutY="38.0" mnemonicParsing="false" onAction="#onUserLogin" prefHeight="25.0" prefWidth="160.0" text="Login" />
+   <MenuButton fx:id="userMenu" accessibleRole="MENU_BUTTON" alignment="CENTER" disable="true" layoutX="691.0" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="User" visible="false">
+       <items>
+           <MenuItem fx:id="userMenu1" mnemonicParsing="false" onAction="#onUserMenu1" text="Update Account" />
+           <MenuItem fx:id="userMenu2" mnemonicParsing="false" onAction="#onUserMenu2" text="Logout" />
+       </items>
+   </MenuButton>
     <SplitMenuButton fx:id="order" alignment="CENTER" layoutX="692.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Hotel Name Ascending">
         <items>
             <MenuItem fx:id="order1" mnemonicParsing="false" onAction="#onSortHotelNameAscending" text="Hotel Name Ascending" />
@@ -71,4 +76,5 @@
          <MenuItem fx:id="roomType6" mnemonicParsing="false" onAction="#onOnePersonRoomSizeClick" text="One Person" />
      </items>
    </SplitMenuButton>
+
 </AnchorPane>

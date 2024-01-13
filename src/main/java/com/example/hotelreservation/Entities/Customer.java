@@ -10,7 +10,7 @@ public class Customer implements IEntity{
     private String identificationNumber;
     private String birthDate;
     private String phone;
-    private  int gender;
+    private int gender;
 
     public Customer() {
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="604.0" maxWidth="453.0" minHeight="604.0" minWidth="453.0" onMouseEntered="#stageShowEventUserInfo" prefHeight="604.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
+
+    <Button fx:id="backHome" disable="false" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#onbackHome" text="Back" visible="true" />
+   <Label layoutX="118.0" layoutY="126.0" prefHeight="25.0" prefWidth="67.0" text="Username" />
+   <TextField fx:id="usernameUserInfo" layoutX="185.0" layoutY="126.0" />
+    <Label layoutX="118.0" layoutY="161.0" prefHeight="25.0" prefWidth="67.0" text="Password" />
+    <TextField fx:id="passwordUserInfo" editable="false" layoutX="185.0" layoutY="161.0" />
+    <Label layoutX="118.0" layoutY="196.0" prefHeight="25.0" prefWidth="67.0" text="Mail" />
+    <TextField fx:id="mailUserInfo" layoutX="185.0" layoutY="196.0" />
+    <Label layoutX="118.0" layoutY="231.0" prefHeight="25.0" prefWidth="67.0" text="Name" />
+    <TextField fx:id="nameUserInfo" layoutX="185.0" layoutY="231.0" />
+    <Label layoutX="118.0" layoutY="266.0" prefHeight="25.0" prefWidth="67.0" text="Surname" />
+    <TextField fx:id="surnameUserInfo" layoutX="185.0" layoutY="266.0" />
+    <Label layoutX="118.0" layoutY="301.0" prefHeight="25.0" prefWidth="67.0" text="Identification Number" />
+    <TextField fx:id="identificationNumberUserInfo" editable="false" layoutX="185.0" layoutY="301.0" />
+    <Label layoutX="118.0" layoutY="336.0" prefHeight="25.0" prefWidth="67.0" text="BirthDate" />
+    <TextField fx:id="birthDateUserInfo" layoutX="185.0" layoutY="336.0" />
+    <Label layoutX="118.0" layoutY="371.0" prefHeight="25.0" prefWidth="67.0" text="Phone" />
+    <TextField fx:id="phoneUserInfo" layoutX="185.0" layoutY="371.0" />
+    <Label layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="67.0" text="Gender" />
+    <TextField fx:id="genderUserInfo" layoutX="185.0" layoutY="406.0" />
+    <Button fx:id="saveUserInfo" layoutX="248.0" layoutY="450.0" mnemonicParsing="false" onAction="#onSaveUserInfo" prefHeight="25.0" prefWidth="86.0" text="Save" />
+</AnchorPane>
