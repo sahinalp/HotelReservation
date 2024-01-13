@@ -29,6 +29,10 @@ public class Customer implements IEntity{
         this.gender = gender;
     }
 
+    public int getID() {
+        return ID;
+    }
+
     public String getUsername() {
         return username;
     }

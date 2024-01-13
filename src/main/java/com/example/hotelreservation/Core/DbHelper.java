@@ -43,8 +43,15 @@ public class DbHelper {
         preparedStatement.close();
         return result;
     }
+    public int update(Connection connection, String tableName,String script,int ID) throws SQLException {
+        preparedStatement=connection.prepareStatement("UPDATE \"HotelApp\"."+tableName+" SET " +
+                script+" WHERE \"ID\"="+ID+";");
+        int result=  preparedStatement.executeUpdate();
+        preparedStatement.close();
+        return result;
+    }
     public int delete(Connection connection,String tableName,int id) throws SQLException {
-        preparedStatement=connection.prepareStatement("delete from "+
+        preparedStatement=connection.prepareStatement("delete from \"HotelApp\""+
                 tableName+" where id="+id);
         int result= preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -56,7 +63,8 @@ public class DbHelper {
         resultSet = statement.executeQuery("select r.\"ID\" , h.\"name\" , r.\"type\" ,\n" +
                 "h.address, h.\"rank\" , r.price , r.currency\n" +
                 "FROM \"HotelApp\".room as r\n" +
-                "inner join \"HotelApp\".hotel h on r.\"hotelID\" = h.\"ID\""+script+" ;");
+                "inner join \"HotelApp\".hotel h on r.\"hotelID\" = h.\"ID\""+script+
+                "WHERE r.\"isFull\"=false ;");
 
 //        ArrayList<Room> roomsArrayList = new ArrayList<Room>();
 //        while (resultSet.next())

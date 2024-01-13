@@ -18,6 +18,10 @@ public class Reservation implements IEntity{
         this.checkOutDate = checkOutDate;
     }
 
+    public Reservation() {
+
+    }
+
     @Override
     public String getValues() {
         return this.ID+","+this.customerID+","+this.roomID+","+this.hotelID+","+"'"+this.checkInDate+"'"+","+
