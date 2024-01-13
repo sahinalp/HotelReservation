@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" onMouseEntered="#stageShowEventOldReservations" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
+
+    <TableView fx:id="roomListTableOldReservations" layoutX="17.0" layoutY="96.0" onMouseClicked="#getItem" prefHeight="449.0" prefWidth="862.0">
+        <columns>
+            <TableColumn fx:id="hotelNameOldReservations" prefWidth="170.0" text="Hotel Name" />
+            <TableColumn fx:id="roomTypeOldReservations" prefWidth="123.0" text="Room Type" />
+            <TableColumn fx:id="addressOldReservations" prefWidth="287.0" text="Address" />
+            <TableColumn fx:id="checkinDateOldReservations" minWidth="0.0" prefWidth="97.0" text="Check-in Date" />
+            <TableColumn fx:id="checkoutDateOldReservations" minWidth="0.0" prefWidth="104.0" text="Check-out Date" />
+            <TableColumn fx:id="priceCurrencyOldReservations" text="Price" />
+        </columns>
+    </TableView>
+    <Button fx:id="backOldReservations" disable="false" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#goMainMenu" text="Back" visible="true" />
+
+
+</AnchorPane>

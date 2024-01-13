@@ -35,7 +35,8 @@
     <MenuButton fx:id="userMenu" accessibleRole="MENU_BUTTON" alignment="CENTER" disable="true" layoutX="691.0" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="User" visible="false">
         <items>
             <MenuItem fx:id="userMenu1" mnemonicParsing="false" onAction="#onUserMenu1" text="Update Account" />
-            <MenuItem fx:id="userMenu2" mnemonicParsing="false" onAction="#onUserMenu2" text="Logout" />
+            <MenuItem fx:id="userMenu2" mnemonicParsing="false" onAction="#onUserMenu2" text="Old Reservations" />
+            <MenuItem fx:id="userMenu3" mnemonicParsing="false" onAction="#onUserMenu3" text="Logout" />
         </items>
     </MenuButton>
     <SplitMenuButton fx:id="order" alignment="CENTER" layoutX="692.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Hotel Name Ascending">

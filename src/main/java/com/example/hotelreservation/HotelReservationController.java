@@ -86,8 +86,10 @@ public class HotelReservationController {
     @FXML
     private TableColumn<HotelRoom, String> priceCurrency;
 
-    ObservableList<HotelRoom> list = null;
+    ObservableList<HotelRoom> hotelRoomList = null;
+    ObservableList<OldReservations> oldReservationsList = null;
     ArrayList<HotelRoom> roomsArrayList=null;
+    ArrayList<OldReservations> oldReservationsArrayList=null;
 
     @FXML
     private Label label1;
@@ -170,6 +172,21 @@ public class HotelReservationController {
     private TextField hotelNamePayment;
     @FXML
     private TextField pricePayment;
+
+    @FXML
+    private TableColumn<OldReservations,String> hotelNameOldReservations;
+    @FXML
+    private TableColumn<OldReservations,String> roomTypeOldReservations;
+    @FXML
+    private TableColumn<OldReservations,String> addressOldReservations;
+    @FXML
+    private TableColumn<OldReservations,String> checkinDateOldReservations;
+    @FXML
+    private TableColumn<OldReservations,String> checkoutDateOldReservations;
+    @FXML
+    private TableColumn<OldReservations,String> priceCurrencyOldReservations;
+    @FXML
+    private TableView<OldReservations> roomListTableOldReservations;
 
     int index;
     private static boolean isStageShowEventRun = false;
@@ -458,11 +475,11 @@ public class HotelReservationController {
 
     @FXML
     protected void onRefreshButtonClick() throws IOException {
-        list = FXCollections.observableArrayList();
+        hotelRoomList = FXCollections.observableArrayList();
         roomsArrayList = hotelsManager.getAllRooms(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
                 "");
         for (HotelRoom room : roomsArrayList) {
-            list.add(room);
+            hotelRoomList.add(room);
         }
         roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         hotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
@@ -471,7 +488,7 @@ public class HotelReservationController {
         hotelRank.setCellValueFactory(new PropertyValueFactory<>("hotelRank"));
         priceCurrency.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
 
-        roomListTable.setItems(list);
+        roomListTable.setItems(hotelRoomList);
 
     }
 
@@ -694,6 +711,35 @@ public class HotelReservationController {
 
         }
     }
+
+    @FXML
+    protected void stageShowEventOldReservations()
+    {
+        if (!isStageShowEventRun) {
+            oldReservationsList = FXCollections.observableArrayList();
+            oldReservationsArrayList = reservationManager.getAllOldReservations(HotelReservationApplication.dbHelper,
+                    HotelReservationApplication.connection,customer.getID());
+            isStageShowEventRun = true;
+            for (OldReservations reservation : oldReservationsArrayList) {
+
+                oldReservationsList.add(reservation);
+
+            }
+            hotelNameOldReservations.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
+            roomTypeOldReservations.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+            addressOldReservations.setCellValueFactory(new PropertyValueFactory<>("address"));
+            checkinDateOldReservations.setCellValueFactory(new PropertyValueFactory<>("checkinDate"));
+            checkoutDateOldReservations.setCellValueFactory(new PropertyValueFactory<>("checkoutDay"));
+            priceCurrencyOldReservations.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
+
+
+            roomListTableOldReservations.setItems(oldReservationsList);
+
+
+
+        }
+    }
+
     public static void setCustomer(Customer _customer) {
         customer = _customer;
         isStageShowEventRun=false;
@@ -753,7 +799,7 @@ public class HotelReservationController {
     }
     private void search()
     {
-        list = FXCollections.observableArrayList();
+        hotelRoomList = FXCollections.observableArrayList();
         String cityText = city.getText();
         if(roomsArrayList!=null && !cityText.equals("") && !roomTypeMenu.getText().equals("All Types"))
         {
@@ -764,7 +810,7 @@ public class HotelReservationController {
                 String[] city = room.getAddress().split(",");
                 if(city[city.length-2].contains(cityText) && roomTypeName.equals(room.getRoomType()))
                 {
-                    list.add(room);
+                    hotelRoomList.add(room);
                 }
             }
 
@@ -773,7 +819,7 @@ public class HotelReservationController {
             for (HotelRoom room : roomsArrayList) {
 
                 if (roomTypeName.equals(room.getRoomType())) {
-                    list.add(room);
+                    hotelRoomList.add(room);
                 }
             }
         }
@@ -785,14 +831,14 @@ public class HotelReservationController {
                 String[] city = room.getAddress().split(",");
                 if(city[city.length-2].contains(cityText))
                 {
-                    list.add(room);
+                    hotelRoomList.add(room);
                 }
             }
         }
         else if(roomsArrayList!=null && cityText.equals("") && roomTypeMenu.getText().equals("All Types")) {
             for (HotelRoom room : roomsArrayList) {
 
-                list.add(room);
+                hotelRoomList.add(room);
 
             }
         }
@@ -803,7 +849,7 @@ public class HotelReservationController {
         hotelRank.setCellValueFactory(new PropertyValueFactory<>("hotelRank"));
         priceCurrency.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
 
-        roomListTable.setItems(list);
+        roomListTable.setItems(hotelRoomList);
     }
 
     @FXML
@@ -812,7 +858,7 @@ public class HotelReservationController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("UserInfo.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 453, 604);
-            stage.setTitle("Hotel Reservation");
+            stage.setTitle(customer.getName()+" "+customer.getSurname());
             stage.setScene(scene);
 
             stage.centerOnScreen();
@@ -824,6 +870,24 @@ public class HotelReservationController {
     }
     @FXML
     protected void onUserMenu2()
+    {
+        try {
+            isStageShowEventRun=false;
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("OldReservations.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 894, 604);
+            stage.setTitle("Old Hotel Reservations");
+            stage.setScene(scene);
+
+            stage.centerOnScreen();
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    @FXML
+    protected void onUserMenu3()
     {
         HotelReservationApplication.isLoggedIn = false;
         userMenu.setVisible(false);
@@ -870,6 +934,7 @@ public class HotelReservationController {
     @FXML
     protected void onSaveUserInfo()
     {
+        System.out.println(customer.getID());
 
     }
     @FXML
@@ -914,5 +979,7 @@ public class HotelReservationController {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

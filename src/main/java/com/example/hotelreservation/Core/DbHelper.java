@@ -84,6 +84,19 @@ public class DbHelper {
 //        }
         return resultSet;
     }
+    public ResultSet getListOfOldReservations(Connection connection,int ID) throws SQLException {
+        ResultSet resultSet;
+        Statement statement=connection.createStatement();
+        resultSet = statement.executeQuery("SELECT h.\"name\",room.\"type\" ,h.address ,\n" +
+                "res.\"checkInDate\", res.\"checkOutDate\",\n" +
+                "room.price ,room.currency \n" +
+                "FROM \"HotelApp\".reservation as res\n" +
+                "inner join \"HotelApp\".room room on room.\"ID\" =res.\"roomID\"\n" +
+                "inner join \"HotelApp\".hotel h on room.\"hotelID\" = h.\"ID\" \n" +
+                "where res.\"ID\" ="+ID+";");
+
+        return resultSet;
+    }
     public ResultSet getEntity(Connection connection,String tableName, IEntity I) throws SQLException {
         ResultSet resultSet;
         Statement statement=connection.createStatement();
