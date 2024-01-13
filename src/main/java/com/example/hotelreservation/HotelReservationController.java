@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -161,6 +162,14 @@ public class HotelReservationController {
     private TextField phoneUserInfo;
     @FXML
     private TextField genderUserInfo;
+    @FXML
+    private DatePicker checkinDatePayment;
+    @FXML
+    private DatePicker checkoutDatePayment;
+    @FXML
+    private TextField hotelNamePayment;
+    @FXML
+    private TextField pricePayment;
 
     int index;
     private static boolean isStageShowEventRun = false;
@@ -168,15 +177,17 @@ public class HotelReservationController {
     HotelsManager hotelsManager = new HotelsManager();
     ReservationManager reservationManager = new ReservationManager();
     static Stage stage;
-    Stage home = new Stage();
-    Stage register = new Stage();
-
     private static Customer customer;
 
     private String mailSenderMail = null;
     private String mailSenderPassword = null;
 
     String roomTypeName ="All Types";
+    private Room reservationRoom;
+    private LocalDate selectedCheckinDate;
+    private LocalDate selectedCheckoutDate;
+    private String selectedHotelName;
+    private String selectedRoomPrice;
 
     @FXML
     protected void onSignInButtonClick() throws IOException {
@@ -471,23 +482,25 @@ public class HotelReservationController {
             return;
         }
 
-//        System.out.println(hotelName.getCellData(index)+" "+ address.getCellData(index));
-        Room room = hotelsManager.getRoom(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
+        reservationRoom = hotelsManager.getRoom(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
                 roomID.getCellData(index));
         Hotel hotel = hotelsManager.getHotel(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-                room.getHotelID());
+                reservationRoom.getHotelID());
+
+        selectedCheckinDate = checkinDate.getValue();
+        selectedCheckoutDate = checkoutDate.getValue();
 
         changeMenu();
 
-        Image image = new Image(room.getPhoto());
+        Image image = new Image(reservationRoom.getPhoto());
         roomImageReserve.setImage(image);
-        facilitiesReserve.setText(room.getFacilities());
-        descriptionReserve.setText(room.getDescription());
-        priceReserve.setText(room.getPrice().toString());
+        facilitiesReserve.setText(reservationRoom.getFacilities());
+        descriptionReserve.setText(reservationRoom.getDescription());
+        priceReserve.setText(reservationRoom.getPrice().toString());
         hotelNameReserve.setText(hotel.getName());
         websiteReserve.setText(hotel.getWebsite());
         telNoReserve.setText(hotel.getTelNo());
-        roomSizeReserve.setText(String.valueOf(room.getRoomSize()));
+        roomSizeReserve.setText(String.valueOf(reservationRoom.getRoomSize()));
         rankReserve.setText(String.valueOf(hotel.getRank()));
         addressReserve.setText(hotel.getAddress());
 
@@ -533,7 +546,6 @@ public class HotelReservationController {
             rankReserve.setVisible(true);
             addressReserve.setVisible(true);
             backReserve.setVisible(true);
-            makeReservationButton.setVisible(true);
             roomImageReserve.setDisable(false);
             reserveButton.setDisable(false);
             facilitiesReserve.setDisable(false);
@@ -562,7 +574,6 @@ public class HotelReservationController {
             label3.setVisible(true);
             label4.setVisible(true);
             label5.setVisible(true);
-            makeReservationButton.setVisible(false);
             roomTypeMenu.setVisible(true);
             checkinDate.setVisible(true);
             checkoutDate.setVisible(true);
@@ -605,16 +616,16 @@ public class HotelReservationController {
     }
 
     @FXML
-    private void onMakeReservation(){
+    protected void onMakeReservation(){
         //Room room, Customer customer, String checkInDate, String checkOutDate
-        Room room = hotelsManager.getRoom(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-                roomID.getCellData(index));
-       int sonuc= reservationManager.makeReservation(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,room,customer,checkinDate.getPromptText(),checkoutDate.getPromptText());
+
+       int sonuc= reservationManager.makeReservation(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
+               reservationRoom,customer,selectedCheckinDate.toString(),selectedCheckoutDate.toString());
         System.out.println(sonuc);
     }
 
     @FXML
-    private void stageShowEvent() {
+    protected void stageShowEvent() {
         if (!isStageShowEventRun) {
             isStageShowEventRun = true;
             try {
@@ -628,6 +639,10 @@ public class HotelReservationController {
                 userLogin.setDisable(true);
                 userMenu.setVisible(true);
                 userMenu.setDisable(false);
+                LocalDate minCheckinDate = LocalDate.now();
+                LocalDate minCheckoutDate = LocalDate.now().plusDays(1);
+                checkinDate.setValue(minCheckinDate);
+                checkoutDate.setValue(minCheckoutDate);
 
             }
 
@@ -661,6 +676,20 @@ public class HotelReservationController {
         }
     }
 
+    @FXML
+    protected void stageShowEventPaymentPage()
+    {
+        if (!isStageShowEventRun) {
+            isStageShowEventRun = true;
+
+            checkinDatePayment.setValue(selectedCheckinDate);
+            checkoutDatePayment.setValue(selectedCheckoutDate);
+            hotelNamePayment.setText(selectedHotelName);
+            pricePayment.setText(selectedRoomPrice);
+
+
+        }
+    }
     public static void setCustomer(Customer _customer) {
         customer = _customer;
         isStageShowEventRun=false;
@@ -838,6 +867,48 @@ public class HotelReservationController {
     protected void onSaveUserInfo()
     {
 
+    }
+    @FXML
+    protected void goPaymentPage() {
+        if (customer != null) {
+            selectedHotelName = hotelNameReserve.getText();
+            selectedRoomPrice = priceReserve.getText();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("PaymentPage.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 894, 604);
+                stage.setTitle("Payment Page");
+                stage.setScene(scene);
+
+                stage.centerOnScreen();
+                stage.show();
+                isStageShowEventRun = false;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else
+        {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Error!!");
+            a.setHeaderText("Please login first");
+            a.show();
+        }
+    }
+    @FXML
+    protected void goMainMenu()
+    {
+        isStageShowEventRun = false;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 894, 604);
+            stage.setTitle("Hotel Reservation");
+            stage.setScene(scene);
+
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
