@@ -183,11 +183,11 @@ public class HotelReservationController {
     private String mailSenderPassword = null;
 
     String roomTypeName ="All Types";
-    private Room reservationRoom;
-    private LocalDate selectedCheckinDate;
-    private LocalDate selectedCheckoutDate;
-    private String selectedHotelName;
-    private String selectedRoomPrice;
+    private static Room reservationRoom;
+    private static LocalDate selectedCheckinDate;
+    private static LocalDate selectedCheckoutDate;
+    private static String selectedHotelName;
+    private static String selectedRoomPrice;
 
     @FXML
     protected void onSignInButtonClick() throws IOException {
@@ -618,9 +618,13 @@ public class HotelReservationController {
     @FXML
     protected void onMakeReservation(){
         //Room room, Customer customer, String checkInDate, String checkOutDate
+        String[] checkinDateList=checkinDatePayment.getValue().toString().split("-");
+        String[] checkoutDateList=checkoutDatePayment.getValue().toString().split("-");
+        String checkinDate = checkinDateList[2]+"/"+checkinDateList[1]+"/"+checkinDateList[0];
+        String checkoutDate=checkoutDateList[2]+"/"+checkoutDateList[1]+"/"+checkoutDateList[0];;
 
        int sonuc= reservationManager.makeReservation(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-               reservationRoom,customer,selectedCheckinDate.toString(),selectedCheckoutDate.toString());
+               reservationRoom,customer,checkinDate,checkoutDate);
         System.out.println(sonuc);
     }
 
