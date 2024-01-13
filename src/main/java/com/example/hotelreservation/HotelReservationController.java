@@ -2,6 +2,7 @@ package com.example.hotelreservation;
 
 import com.example.hotelreservation.Business.Concrete.CustomerManager;
 import com.example.hotelreservation.Business.Concrete.HotelsManager;
+import com.example.hotelreservation.Business.Concrete.ReservationManager;
 import com.example.hotelreservation.Entities.Customer;
 import com.example.hotelreservation.Entities.Hotel;
 import com.example.hotelreservation.Entities.HotelRoom;
@@ -30,6 +31,7 @@ public class HotelReservationController {
     public Label errorText;
     public SplitMenuButton roomTypeMenu;
 
+    public Button makeReservationButton;
     private int menu = 1;
     @FXML
     private Label welcomeText;
@@ -96,8 +98,6 @@ public class HotelReservationController {
     private Label label4;
     @FXML
     private Label label5;
-    @FXML
-    private ChoiceBox roomTypeChoiceBox;
     @FXML
     private DatePicker checkinDate;
     @FXML
@@ -166,6 +166,7 @@ public class HotelReservationController {
     private static boolean isStageShowEventRun = false;
     CustomerManager customerManager = new CustomerManager();
     HotelsManager hotelsManager = new HotelsManager();
+    ReservationManager reservationManager = new ReservationManager();
     static Stage stage;
     Stage home = new Stage();
     Stage register = new Stage();
@@ -178,7 +179,7 @@ public class HotelReservationController {
     String roomTypeName ="All Types";
 
     @FXML
-    protected void onHelloButtonClick() throws IOException {
+    protected void onSignInButtonClick() throws IOException {
 
         boolean canLogin = false;
         canLogin = customerManager.login(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
@@ -507,6 +508,9 @@ public class HotelReservationController {
             label3.setVisible(false);
             label4.setVisible(false);
             label5.setVisible(false);
+
+            roomTypeMenu.setVisible(false);
+
             checkinDate.setVisible(false);
             checkoutDate.setVisible(false);
             currency.setVisible(false);
@@ -529,7 +533,7 @@ public class HotelReservationController {
             rankReserve.setVisible(true);
             addressReserve.setVisible(true);
             backReserve.setVisible(true);
-
+            makeReservationButton.setVisible(true);
             roomImageReserve.setDisable(false);
             reserveButton.setDisable(false);
             facilitiesReserve.setDisable(false);
@@ -558,6 +562,8 @@ public class HotelReservationController {
             label3.setVisible(true);
             label4.setVisible(true);
             label5.setVisible(true);
+            makeReservationButton.setVisible(false);
+            roomTypeMenu.setVisible(true);
             checkinDate.setVisible(true);
             checkoutDate.setVisible(true);
             currency.setVisible(true);
@@ -596,6 +602,15 @@ public class HotelReservationController {
                 userMenu.setDisable(true);
             }
         }
+    }
+
+    @FXML
+    private void onMakeReservation(){
+        //Room room, Customer customer, String checkInDate, String checkOutDate
+        Room room = hotelsManager.getRoom(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
+                roomID.getCellData(index));
+       int sonuc= reservationManager.makeReservation(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,room,customer,checkinDate.getPromptText(),checkoutDate.getPromptText());
+        System.out.println(sonuc);
     }
 
     @FXML
