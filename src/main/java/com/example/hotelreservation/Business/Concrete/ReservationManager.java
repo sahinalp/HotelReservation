@@ -24,7 +24,16 @@ public class ReservationManager implements IReservationService {
         try {
             // Set room's isFull as true
             try {
-                result = dbHelper.update(connection,"room","\"isFull\"=true",room.getID());
+                ResultSet resultSet = dbHelper.getEntity(connection,"room",room,room.getID());
+                resultSet.next();
+                boolean isRoomFull=resultSet.getBoolean(4);
+                if (!isRoomFull) {
+                    result = dbHelper.update(connection, "room", "\"isFull\"=true", room.getID());
+                }
+                else
+                {
+                    result=-1;
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
