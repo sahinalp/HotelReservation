@@ -152,6 +152,8 @@ public class HotelReservationController {
     private String mailSenderMail = null;
     private String mailSenderPassword = null;
 
+    String roomTypeName ="All Types";
+
     @FXML
     protected void onHelloButtonClick() throws IOException {
 
@@ -461,39 +463,7 @@ public class HotelReservationController {
     @FXML
     protected void searchCity()
     {
-        list = FXCollections.observableArrayList();
-        String cityText = city.getText();
-        if(roomsArrayList!=null && !cityText.equals(""))
-        {
-            cityText= cityText.toLowerCase().substring(0,1).toUpperCase()+
-                    cityText.toLowerCase().substring(1).toLowerCase();
-            for (HotelRoom room : roomsArrayList) {
-
-                String[] city = room.getAddress().split(",");
-                if(city[city.length-2].contains(cityText))
-                {
-                    list.add(room);
-                }
-            }
-
-        }
-        else if(roomsArrayList!=null) {
-            for (HotelRoom room : roomsArrayList) {
-
-                if (room.getAddress().contains(cityText)) {
-                    list.add(room);
-                }
-            }
-        }
-        roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
-        hotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
-        roomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
-        address.setCellValueFactory(new PropertyValueFactory<>("address"));
-        hotelRank.setCellValueFactory(new PropertyValueFactory<>("hotelRank"));
-        priceCurrency.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
-
-        roomListTable.setItems(list);
-
+        search();
     }
 
     @FXML
@@ -591,36 +561,112 @@ public class HotelReservationController {
     public static void setCustomer(Customer _customer) {
         customer = _customer;
     }
+    @FXML
+    protected void onAllSizeClick(){
+        roomTypeMenu.setText("All Types");
+        roomTypeName="All Types";
+        searchRoomType();
+    }
 
     @FXML
     protected void onSuiteClick() {
         roomTypeMenu.setText(RoomTypes.Suite.name());
+        roomTypeName=RoomTypes.Suite.name();
+        searchRoomType();
     }
 
     @FXML
     protected void onKingSizeClick() {
         roomTypeMenu.setText(RoomTypes.King.name());
+        roomTypeName=RoomTypes.King.name();
+        searchRoomType();
     }
 
     @FXML
     protected void onQuadSizeClick() {
         roomTypeMenu.setText(RoomTypes.Quad.name());
+        roomTypeName=RoomTypes.Quad.name();
+        searchRoomType();
     }
 
     @FXML
     protected void onTripleSizeClick() {
         roomTypeMenu.setText(RoomTypes.Triple.name());
+        roomTypeName=RoomTypes.Triple.name();
+        searchRoomType();
     }
 
     @FXML
     protected void onOnePersonRoomSizeClick() {
         roomTypeMenu.setText(RoomTypes.OnePersonRoom.name());
+        roomTypeName=RoomTypes.OnePersonRoom.name();
+        searchRoomType();
     }
 
     @FXML
     protected void onTwinRoomSizeClick() {
         roomTypeMenu.setText(RoomTypes.TwinRoom.name());
+        roomTypeName=RoomTypes.TwinRoom.name();
+        searchRoomType();
     }
 
+    protected void searchRoomType()
+    {
+        search();
+    }
+    private void search()
+    {
+        list = FXCollections.observableArrayList();
+        String cityText = city.getText();
+        if(roomsArrayList!=null && !cityText.equals("") && !roomTypeMenu.getText().equals("All Types"))
+        {
+            cityText= cityText.toLowerCase().substring(0,1).toUpperCase()+
+                    cityText.toLowerCase().substring(1).toLowerCase();
+            for (HotelRoom room : roomsArrayList) {
+
+                String[] city = room.getAddress().split(",");
+                if(city[city.length-2].contains(cityText) && roomTypeName.equals(room.getRoomType()))
+                {
+                    list.add(room);
+                }
+            }
+
+        }
+        else if(roomsArrayList!=null && cityText.equals("") && !roomTypeMenu.getText().equals("All Types")) {
+            for (HotelRoom room : roomsArrayList) {
+
+                if (roomTypeName.equals(room.getRoomType())) {
+                    list.add(room);
+                }
+            }
+        }
+        else if(roomsArrayList!=null && !cityText.equals("") && roomTypeMenu.getText().equals("All Types")) {
+            cityText= cityText.toLowerCase().substring(0,1).toUpperCase()+
+                    cityText.toLowerCase().substring(1).toLowerCase();
+            for (HotelRoom room : roomsArrayList) {
+
+                String[] city = room.getAddress().split(",");
+                if(city[city.length-2].contains(cityText))
+                {
+                    list.add(room);
+                }
+            }
+        }
+        else if(roomsArrayList!=null && cityText.equals("") && roomTypeMenu.getText().equals("All Types")) {
+            for (HotelRoom room : roomsArrayList) {
+
+                list.add(room);
+
+            }
+        }
+        roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
+        hotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
+        roomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        hotelRank.setCellValueFactory(new PropertyValueFactory<>("hotelRank"));
+        priceCurrency.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
+
+        roomListTable.setItems(list);
+    }
 
 }
