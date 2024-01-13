@@ -15,7 +15,7 @@
       <children>
          <TextField fx:id="username" layoutX="47.0" layoutY="62.0" promptText="Username" />
          <TextField fx:id="password" layoutX="47.0" layoutY="99.0" promptText="Password" />
-        <Button layoutX="91.0" layoutY="139.0" onAction="#onHelloButtonClick" style="-fx-background-color: DODGERBLUE;" text="SIGN IN" textFill="WHITE">
+        <Button layoutX="91.0" layoutY="139.0" onAction="#onSignInButtonClick" style="-fx-background-color: DODGERBLUE;" text="SIGN IN" textFill="WHITE">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
