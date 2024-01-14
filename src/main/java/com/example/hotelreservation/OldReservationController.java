@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -25,6 +26,8 @@ public class OldReservationController implements Initializable {
     public Button backOldReservations;
     @FXML
     private TableColumn<OldReservations, Integer> oldReservationRoomID;
+    @FXML
+    private TableColumn<OldReservations, Integer> oldReservationReservationID;
     ObservableList<OldReservations> oldReservationsList = null;
     ArrayList<OldReservations> oldReservationsArrayList = null;
 
@@ -44,17 +47,22 @@ public class OldReservationController implements Initializable {
     private TableView<OldReservations> roomListTableOldReservations;
 
     ReservationManager reservationManager = new ReservationManager();
+    private int reservationID;
 
     HotelsManager hotelsManager = new HotelsManager();
     PaymentDetailController paymentDetailController = new PaymentDetailController();
+    private String checinDate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         oldReservationsList = FXCollections.observableArrayList();
         oldReservationsArrayList = reservationManager.getAllOldReservations(HotelReservationApplication.dbHelper,
                 HotelReservationApplication.connection, customer.getID());
-        oldReservationsList.addAll(oldReservationsArrayList);
+        for (OldReservations reservation : oldReservationsArrayList) {
+            oldReservationsList.add(reservation);
+        }
         oldReservationRoomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
+        oldReservationReservationID.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
         hotelNameOldReservations.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
         roomTypeOldReservations.setCellValueFactory(new PropertyValueFactory<>("roomType"));
         addressOldReservations.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -70,12 +78,20 @@ public class OldReservationController implements Initializable {
     }
 
     @FXML
-    protected void getOldReservation()  {
+    protected void getOldReservation() {
+        int selectedRoomIndex = roomListTableOldReservations.getSelectionModel().getSelectedIndex();
+        if (selectedRoomIndex <= -1) {
+            return;
+        }
         oldReservationsList = FXCollections.observableArrayList();
         oldReservationsArrayList = reservationManager.getAllOldReservations(HotelReservationApplication.dbHelper,
-                HotelReservationApplication.connection,customer.getID());
-        oldReservationsList.addAll(oldReservationsArrayList);
-        oldReservationRoomID.setCellValueFactory(new PropertyValueFactory<>("oldReservationRoomID"));
+                HotelReservationApplication.connection, customer.getID());
+        for (OldReservations reservation : oldReservationsArrayList) {
+            oldReservationsList.add(reservation);
+        }
+//        oldReservationsList.addAll(oldReservationsArrayList);
+        oldReservationRoomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
+        oldReservationReservationID.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
         hotelNameOldReservations.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
         roomTypeOldReservations.setCellValueFactory(new PropertyValueFactory<>("roomType"));
         addressOldReservations.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -83,23 +99,28 @@ public class OldReservationController implements Initializable {
         checkoutDateOldReservations.setCellValueFactory(new PropertyValueFactory<>("checkoutDay"));
         priceCurrencyOldReservations.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
         roomListTableOldReservations.setItems(oldReservationsList);
-        int selectedRoomIndex = Integer.parseInt( oldReservationRoomID.getId());
         reservationRoom = hotelsManager.getRoom(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-               selectedRoomIndex);
+                oldReservationRoomID.getCellData(selectedRoomIndex));
+        reservationID = oldReservationReservationID.getCellData(selectedRoomIndex);
+        checinDate = checkinDateOldReservations.getCellData(selectedRoomIndex);
 
 
     }
 
     @FXML
     protected void onCancelReservationClick() throws IOException {
-        reservationResult = reservationManager.cancelReservation(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-                reservationRoom);
-        if(reservationResult==1){
-            paymentDetailController.goPaymentResultPage();
+        LocalDate today = LocalDate.now();
+        String[] checinDateList = checinDate.split("/");
+        LocalDate checkinDate = LocalDate.parse(checinDateList[2] + "-" + checinDateList[1] + "-" + checinDateList[0]);
+        if (checkinDate.isAfter(checkinDate.plusDays(1))) {
+            reservationResult = reservationManager.cancelReservation(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
+                    reservationRoom, reservationID);
+        } else {
+            reservationResult = 0;
         }
 
-        System.out.println(reservationResult);
+        paymentDetailController.goPaymentResultPage();
+
 
     }
-
 }

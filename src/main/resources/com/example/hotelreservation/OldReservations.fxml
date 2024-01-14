@@ -5,10 +5,15 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.OldReservationController">
+    <Button fx:id="backOldReservations" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: transparant;" text="&lt;- Back" textFill="DODGERBLUE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
 
     <TableView fx:id="roomListTableOldReservations" layoutX="17.0" layoutY="96.0" onMouseClicked="#getOldReservation" prefHeight="449.0" prefWidth="862.0">
         <columns>
             <TableColumn fx:id="oldReservationRoomID" prefWidth="75.0" text="ID" visible="false" />
+            <TableColumn fx:id="oldReservationReservationID" prefWidth="75.0" text="ID" visible="false" />
             <TableColumn fx:id="hotelNameOldReservations" prefWidth="170.0" text="Hotel Name" />
             <TableColumn fx:id="roomTypeOldReservations" prefWidth="123.0" text="Room Type" />
             <TableColumn fx:id="addressOldReservations" prefWidth="287.0" text="Address" />
@@ -17,10 +22,6 @@
             <TableColumn fx:id="priceCurrencyOldReservations" text="Price" />
         </columns>
     </TableView>
-    <Button fx:id="backOldReservations" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: transparant;" text="&lt;- Back" textFill="DODGERBLUE">
-      <font>
-         <Font name="System Bold" size="12.0" />
-      </font></Button>
    <Button layoutX="733.0" layoutY="556.0" mnemonicParsing="false" onAction="#onCancelReservationClick" prefHeight="25.0" prefWidth="146.0" text="Cancel reservation" />
 
 

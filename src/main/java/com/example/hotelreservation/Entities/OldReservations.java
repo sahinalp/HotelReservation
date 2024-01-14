@@ -2,6 +2,7 @@ package com.example.hotelreservation.Entities;
 
 public class OldReservations {
     public int roomID;
+    public int reservationID;
     public String hotelName;
     public String roomType;
     public String address;
@@ -12,15 +13,24 @@ public class OldReservations {
     public OldReservations() {
     }
 
-    public OldReservations(int roomID,String hotelName, String roomType, String address,String checkinDate,
+    public OldReservations(int roomID,int reservationID,String hotelName, String roomType, String address,String checkinDate,
                            String checkoutDay, Double price, String currency) {
         this.roomID = roomID;
+        this.reservationID=reservationID;
         this.hotelName = hotelName;
         this.roomType = roomType;
         this.address = address;
         this.checkinDate=checkinDate;
         this.checkoutDay = checkoutDay;
         this.priceCurrency = price.toString() +" "+currency;
+    }
+
+    public int getReservationID() {
+        return reservationID;
+    }
+
+    public void setReservationID(int reservationID) {
+        this.reservationID = reservationID;
     }
 
     public int getRoomID() {

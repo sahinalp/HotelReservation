@@ -56,11 +56,11 @@ public class ReservationManager implements IReservationService {
     }
 
     @Override
-    public int cancelReservation(DbHelper dbHelper, Connection connection, Room room) {
+    public int cancelReservation(DbHelper dbHelper, Connection connection, Room room,int reservationID) {
         lock.lock();
         int result=0;
         try {
-            result =  dbHelper.delete(connection,"reservation", room.getID());
+            result =  dbHelper.delete(connection,"reservation", reservationID);
             if(result==1){
                 result= dbHelper.update(connection, "room", "\"isFull\"=false", room.getID());
             }else{
@@ -113,13 +113,14 @@ public class ReservationManager implements IReservationService {
             {
                 oldReservationsArrayList.add(new OldReservations(
                         resultSet.getInt(1),
-                        resultSet.getString(2),
+                        resultSet.getInt(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
                         resultSet.getString(5),
                         resultSet.getString(6),
-                        resultSet.getDouble(7),
-                        resultSet.getString(8)
+                        resultSet.getString(7),
+                        resultSet.getDouble(8),
+                        resultSet.getString(9)
                 ));
             }
             resultSet.close();

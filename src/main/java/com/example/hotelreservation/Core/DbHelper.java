@@ -47,9 +47,9 @@ public class DbHelper {
         preparedStatement.close();
         return result;
     }
-    public int delete(Connection connection,String tableName,int id) throws SQLException {
-        preparedStatement=connection.prepareStatement("delete from \"HotelApp\""+
-                tableName+" where id="+id);
+    public int delete(Connection connection,String tableName,int reservationId) throws SQLException {
+        preparedStatement=connection.prepareStatement("DELETE FROM \"HotelApp\".reservation\n" +
+                "WHERE \"ID\"="+reservationId+";");
         int result= preparedStatement.executeUpdate();
         preparedStatement.close();
         return result;
@@ -84,13 +84,13 @@ public class DbHelper {
     public ResultSet getListOfOldReservations(Connection connection,int ID) throws SQLException {
         ResultSet resultSet;
         Statement statement=connection.createStatement();
-        resultSet = statement.executeQuery("SELECT res.\"roomID\",h.\"name\",room.\"type\" ,h.address ,\n" +
+        resultSet = statement.executeQuery("SELECT res.\"roomID\",res.\"ID\",h.\"name\",room.\"type\" ,h.address ,\n" +
                 "res.\"checkInDate\", res.\"checkOutDate\",\n" +
                 "room.price ,room.currency \n" +
                 "FROM \"HotelApp\".reservation as res\n" +
                 "inner join \"HotelApp\".room room on room.\"ID\" =res.\"roomID\"\n" +
                 "inner join \"HotelApp\".hotel h on room.\"hotelID\" = h.\"ID\" \n" +
-                "where res.\"ID\" ="+ID+";");
+                "where res.\"customerID\" ="+ID+";");
 
         return resultSet;
     }

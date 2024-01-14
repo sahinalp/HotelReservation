@@ -32,4 +32,6 @@
    <Label layoutX="411.0" layoutY="344.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="72.0" text="Room size : " />
    <Label layoutX="411.0" layoutY="383.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="72.0" text="Price : " />
    <Label fx:id="currency" layoutX="555.0" layoutY="383.0" text="TL" />
+    <Label fx:id="roomSize" layoutX="555.0" layoutY="344.0" prefHeight="17.0" prefWidth="12.0" text="m" />
+    <Label fx:id="roomSize" layoutX="564.0" layoutY="336.0" text="2" />
 </AnchorPane>
