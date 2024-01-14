@@ -132,11 +132,7 @@ public class HomeController implements Initializable {
                 }
             }
         } else if (roomsArrayList != null && cityText.equals("") && roomTypeMenu.getText().equals("All Types")) {
-            for (HotelRoom room : roomsArrayList) {
-
-                hotelRoomList.add(room);
-
-            }
+            hotelRoomList.addAll(roomsArrayList);
         }
         roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         hotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));

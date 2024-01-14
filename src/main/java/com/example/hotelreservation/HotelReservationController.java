@@ -37,7 +37,7 @@ import static com.example.hotelreservation.HomeController.stage;
 public class HotelReservationController {
     public Label errorText;
 
-    static int reservationResult = 0;
+    public static int reservationResult = 0;
 
 
     public Button makeReservationButton;

@@ -1,7 +1,10 @@
 package com.example.hotelreservation;
 
+import com.example.hotelreservation.Business.Abstract.IReservationService;
 import com.example.hotelreservation.Business.Concrete.HotelsManager;
 import com.example.hotelreservation.Business.Concrete.ReservationManager;
+import com.example.hotelreservation.Business.Threads.ReservationReader;
+import com.example.hotelreservation.Business.Threads.ReservationWriter;
 import com.example.hotelreservation.Entities.OldReservations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,19 +20,25 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.example.hotelreservation.HomeController.customer;
 import static com.example.hotelreservation.HomeController.reservationRoom;
 import static com.example.hotelreservation.HotelReservationController.reservationResult;
 
 public class OldReservationController implements Initializable {
+    ExecutorService executorService = Executors.newCachedThreadPool();
+    Lock lock = new ReentrantLock();
     public Button backOldReservations;
     @FXML
     private TableColumn<OldReservations, Integer> oldReservationRoomID;
     @FXML
     private TableColumn<OldReservations, Integer> oldReservationReservationID;
     ObservableList<OldReservations> oldReservationsList = null;
-    ArrayList<OldReservations> oldReservationsArrayList = null;
+    public static ArrayList<OldReservations> oldReservationsArrayList = null;
 
     @FXML
     private TableColumn<OldReservations, String> hotelNameOldReservations;
@@ -46,7 +55,8 @@ public class OldReservationController implements Initializable {
     @FXML
     private TableView<OldReservations> roomListTableOldReservations;
 
-    ReservationManager reservationManager = new ReservationManager();
+    IReservationService reservationService = new ReservationManager();
+
     private int reservationID;
 
     HotelsManager hotelsManager = new HotelsManager();
@@ -56,11 +66,10 @@ public class OldReservationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         oldReservationsList = FXCollections.observableArrayList();
-        oldReservationsArrayList = reservationManager.getAllOldReservations(HotelReservationApplication.dbHelper,
-                HotelReservationApplication.connection, customer.getID());
-        for (OldReservations reservation : oldReservationsArrayList) {
-            oldReservationsList.add(reservation);
-        }
+        lock.lock();
+        executorService.execute(new ReservationReader(reservationService,HotelReservationApplication.dbHelper,HotelReservationApplication.connection,customer.getID()));
+        lock.unlock();
+        oldReservationsList.addAll(oldReservationsArrayList);
         oldReservationRoomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         oldReservationReservationID.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
         hotelNameOldReservations.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
@@ -70,6 +79,7 @@ public class OldReservationController implements Initializable {
         checkoutDateOldReservations.setCellValueFactory(new PropertyValueFactory<>("checkoutDay"));
         priceCurrencyOldReservations.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
         roomListTableOldReservations.setItems(oldReservationsList);
+        executorService.shutdown();
     }
 
     @FXML
@@ -78,18 +88,17 @@ public class OldReservationController implements Initializable {
     }
 
     @FXML
-    protected void getOldReservation() {
+    protected void getOldReservation() throws InterruptedException {
         int selectedRoomIndex = roomListTableOldReservations.getSelectionModel().getSelectedIndex();
         if (selectedRoomIndex <= -1) {
             return;
         }
         oldReservationsList = FXCollections.observableArrayList();
-        oldReservationsArrayList = reservationManager.getAllOldReservations(HotelReservationApplication.dbHelper,
-                HotelReservationApplication.connection, customer.getID());
-        for (OldReservations reservation : oldReservationsArrayList) {
-            oldReservationsList.add(reservation);
-        }
-//        oldReservationsList.addAll(oldReservationsArrayList);
+        lock.lock();
+        executorService.execute(new ReservationReader(reservationService,HotelReservationApplication.dbHelper,HotelReservationApplication.connection,customer.getID()));
+        Thread.sleep(5000);
+        lock.unlock();
+        oldReservationsList.addAll(oldReservationsArrayList);
         oldReservationRoomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         oldReservationReservationID.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
         hotelNameOldReservations.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
@@ -104,23 +113,24 @@ public class OldReservationController implements Initializable {
         reservationID = oldReservationReservationID.getCellData(selectedRoomIndex);
         checinDate = checkinDateOldReservations.getCellData(selectedRoomIndex);
 
-
+        executorService.shutdown();
     }
 
     @FXML
-    protected void onCancelReservationClick() throws IOException {
-        LocalDate today = LocalDate.now();
+    protected void onCancelReservationClick() throws IOException, InterruptedException {
         String[] checinDateList = checinDate.split("/");
         LocalDate checkinDate = LocalDate.parse(checinDateList[2] + "-" + checinDateList[1] + "-" + checinDateList[0]);
         if (checkinDate.isAfter(checkinDate.plusDays(1))) {
-            reservationResult = reservationManager.cancelReservation(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-                    reservationRoom, reservationID);
+            lock.lock();
+            executorService.execute(new ReservationWriter(reservationService,false,HotelReservationApplication.dbHelper, HotelReservationApplication.connection, reservationRoom, reservationID,customer,checkinDateOldReservations.getText(),checkoutDateOldReservations.getText()));
+        Thread.sleep(5000);
+        lock.unlock();
         } else {
             reservationResult = 0;
         }
 
         paymentDetailController.goPaymentResultPage();
-
+        executorService.shutdown();
 
     }
 }
