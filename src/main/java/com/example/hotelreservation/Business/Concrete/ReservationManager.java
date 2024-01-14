@@ -3,7 +3,6 @@ package com.example.hotelreservation.Business.Concrete;
 import com.example.hotelreservation.Business.Abstract.IReservationService;
 import com.example.hotelreservation.Core.DbHelper;
 import com.example.hotelreservation.Entities.*;
-import com.example.hotelreservation.HotelReservationApplication;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -57,13 +56,23 @@ public class ReservationManager implements IReservationService {
     }
 
     @Override
-    public void cancelReservation() {
-        // lock.lock();
+    public int cancelReservation(DbHelper dbHelper, Connection connection, Room room) {
+        lock.lock();
+        int result=0;
         try {
+            result =  dbHelper.delete(connection,"reservation", room.getID());
+            if(result==1){
+                result= dbHelper.update(connection, "room", "\"isFull\"=false", room.getID());
+            }else{
+                result =0;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         } finally {
-
-
+            lock.unlock();
         }
+        return result;
     }
 
     @Override
@@ -103,13 +112,14 @@ public class ReservationManager implements IReservationService {
             while (resultSet.next())
             {
                 oldReservationsArrayList.add(new OldReservations(
-                        resultSet.getString(1),
+                        resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
                         resultSet.getString(5),
-                        resultSet.getDouble(6),
-                        resultSet.getString(7)
+                        resultSet.getString(6),
+                        resultSet.getDouble(7),
+                        resultSet.getString(8)
                 ));
             }
             resultSet.close();

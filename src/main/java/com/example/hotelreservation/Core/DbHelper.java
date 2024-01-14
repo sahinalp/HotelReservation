@@ -1,13 +1,10 @@
 package com.example.hotelreservation.Core;
 
 import com.example.hotelreservation.Entities.IEntity;
-import com.example.hotelreservation.Entities.Room;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Properties;
 
 public class DbHelper {
@@ -87,7 +84,7 @@ public class DbHelper {
     public ResultSet getListOfOldReservations(Connection connection,int ID) throws SQLException {
         ResultSet resultSet;
         Statement statement=connection.createStatement();
-        resultSet = statement.executeQuery("SELECT h.\"name\",room.\"type\" ,h.address ,\n" +
+        resultSet = statement.executeQuery("SELECT res.\"roomID\",h.\"name\",room.\"type\" ,h.address ,\n" +
                 "res.\"checkInDate\", res.\"checkOutDate\",\n" +
                 "room.price ,room.currency \n" +
                 "FROM \"HotelApp\".reservation as res\n" +

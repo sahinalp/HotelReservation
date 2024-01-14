@@ -22,7 +22,7 @@ public class ReservationWriter implements Runnable{
         if (makeReservation) {
 //            reservationService.makeReservation();
         } else {
-            reservationService.cancelReservation();
+           // reservationService.cancelReservation();
         }
     }
 }

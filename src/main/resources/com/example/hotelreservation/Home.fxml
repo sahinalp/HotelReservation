@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" onMouseEntered="#stageShowEvent" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
+<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HomeController">
     <TextField fx:id="city" layoutX="113.0" layoutY="50.0" onKeyTyped="#searchCity" prefHeight="25.0" prefWidth="174.0" />
     <DatePicker fx:id="checkinDate" layoutX="113.0" layoutY="88.0" />
     <DatePicker fx:id="checkoutDate" layoutX="113.0" layoutY="128.0" />
     <Label alignment="CENTER" layoutX="319.0" layoutY="4.0" prefHeight="27.0" prefWidth="245.0" text="Hotel Reservation" textFill="DODGERBLUE">
         <font>
             <Font name="System Bold" size="18.0" />
-        </font></Label>
+        </font>
+    </Label>
     <Label fx:id="label1" layoutX="623.0" layoutY="77.0" text="Room Type" AnchorPane.rightAnchor="210.0" />
     <Label fx:id="label2" layoutX="30.0" layoutY="92.0" text="Check in date" />
     <Label fx:id="label3" layoutX="26.0" layoutY="132.0" text="Check out date" />
     <Label fx:id="label4" layoutX="75.0" layoutY="54.0" text="City" />
-    <ChoiceBox fx:id="currency" layoutX="501.0" layoutY="73.0" prefHeight="25.0" prefWidth="38.0" />
-    <Label fx:id="label5" layoutX="651.0" layoutY="112.0" text="Sırala" />
+    <Label fx:id="label5" layoutX="651.0" layoutY="112.0" text="Order" />
     <TableView fx:id="roomListTable" layoutX="55.0" layoutY="188.0" onMouseClicked="#getItem" prefHeight="357.0" prefWidth="798.0">
         <columns>
             <TableColumn fx:id="roomID" prefWidth="75.0" text="ID" visible="false" />
@@ -29,8 +28,6 @@
             <TableColumn fx:id="priceCurrency" prefWidth="107.0" text="Price" />
         </columns>
     </TableView>
-    <Slider fx:id="slider" layoutX="387.0" layoutY="48.0" prefHeight="14.0" prefWidth="150.0" />
-    <TextField fx:id="price" layoutX="384.0" layoutY="73.0" prefHeight="25.0" prefWidth="114.0" promptText="Price" />
     <Button fx:id="userLogin" alignment="CENTER" layoutX="691.0" layoutY="38.0" mnemonicParsing="false" onAction="#onUserLogin" prefHeight="25.0" prefWidth="160.0" text="Login" />
     <MenuButton fx:id="userMenu" accessibleRole="MENU_BUTTON" alignment="CENTER" disable="true" layoutX="691.0" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="User" visible="false">
         <items>
@@ -54,18 +51,6 @@
         </items>
     </SplitMenuButton>
     <Button fx:id="refresh" layoutX="792.0" layoutY="153.0" mnemonicParsing="false" onAction="#onRefreshButtonClick" prefHeight="25.0" prefWidth="61.0" text="Refresh" />
-    <ImageView fx:id="roomImageReserve" disable="true" fitHeight="359.0" fitWidth="376.0" layoutX="59.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-    <Button fx:id="reserveButton" disable="true" layoutX="724.0" layoutY="539.0" mnemonicParsing="false" onAction="#goPaymentPage" prefHeight="25.0" prefWidth="80.0" text="Reserve" visible="false" />
-    <TextArea fx:id="facilitiesReserve" disable="true" editable="false" layoutX="465.0" layoutY="269.0" prefHeight="295.0" prefWidth="200.0" visible="false" />
-    <TextArea fx:id="descriptionReserve" disable="true" editable="false" layoutX="104.0" layoutY="93.0" prefHeight="95.0" prefWidth="529.0" visible="false" wrapText="true" />
-    <TextField fx:id="priceReserve" disable="true" editable="false" layoutX="690.0" layoutY="507.0" visible="false" />
-    <TextField fx:id="hotelNameReserve" disable="true" editable="false" layoutX="102.0" layoutY="50.0" prefHeight="25.0" prefWidth="529.0" visible="false" />
-    <TextField fx:id="websiteReserve" disable="true" editable="false" layoutX="465.0" layoutY="198.0" prefHeight="25.0" prefWidth="376.0" visible="false" />
-    <TextField fx:id="telNoReserve" disable="true" editable="false" layoutX="465.0" layoutY="234.0" prefHeight="25.0" prefWidth="376.0" visible="false" />
-    <TextField fx:id="roomSizeReserve" disable="true" editable="false" layoutX="646.0" layoutY="163.0" prefHeight="25.0" prefWidth="72.0" visible="false" />
-    <TextField fx:id="rankReserve" disable="true" editable="false" layoutX="677.0" layoutY="73.0" prefHeight="25.0" prefWidth="94.0" visible="false" />
-    <TextArea fx:id="addressReserve" disable="true" editable="false" layoutX="690.0" layoutY="269.0" prefHeight="137.0" prefWidth="150.0" visible="false" wrapText="true" />
-    <Button fx:id="backReserve" disable="true" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#changeMenu" text="Back" visible="false" />
     <SplitMenuButton fx:id="roomTypeMenu" alignment="CENTER" layoutX="763.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="All Types" AnchorPane.rightAnchor="43.0">
         <items>
             <MenuItem fx:id="roomType0" mnemonicParsing="false" onAction="#onAllSizeClick" text="All Types" />

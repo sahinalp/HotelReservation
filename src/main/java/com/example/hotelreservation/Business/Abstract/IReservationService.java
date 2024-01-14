@@ -9,7 +9,7 @@ import java.sql.Connection;
 public interface IReservationService {
     int makeReservation(DbHelper dbHelper, Connection connection, Room room, Customer customer, String checkInDate, String checkOutDate);
 
-    void cancelReservation();
+    int cancelReservation(DbHelper dbHelper, Connection connection, Room room);
 
     void getHistory();
 

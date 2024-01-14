@@ -3,15 +3,11 @@ package com.example.hotelreservation.Business.Concrete;
 import com.example.hotelreservation.Business.Abstract.ICustomerService;
 import com.example.hotelreservation.Core.DbHelper;
 import com.example.hotelreservation.Entities.Customer;
-import com.example.hotelreservation.Entities.HotelRoom;
-import com.example.hotelreservation.Entities.IEntity;
-import com.example.hotelreservation.Entities.Room;
 import com.example.hotelreservation.HotelReservationController;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class CustomerManager implements ICustomerService {
 

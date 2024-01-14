@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.PaymentDetailController">
+    <ImageView fx:id="roomImageReserve" fitHeight="228.0" fitWidth="376.0" layoutX="13.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
+    <TextArea fx:id="facilitiesReserve" editable="false" layoutX="405.0" layoutY="180.0" prefHeight="143.0" prefWidth="483.0" />
+    <TextArea fx:id="descriptionReserve" editable="false" layoutX="405.0" layoutY="78.0" prefHeight="95.0" prefWidth="483.0" wrapText="true" />
+    <TextField fx:id="priceReserve" editable="false" layoutX="479.0" layoutY="379.0" prefHeight="25.0" prefWidth="72.0" />
+    <TextField fx:id="hotelNameReserve" editable="false" layoutX="479.0" layoutY="41.0" prefHeight="25.0" prefWidth="409.0" />
+    <TextField fx:id="websiteReserve" editable="false" layoutX="68.0" layoutY="282.0" prefHeight="25.0" prefWidth="322.0" />
+    <TextField fx:id="telNoReserve" editable="false" layoutX="68.0" layoutY="319.0" prefHeight="25.0" prefWidth="322.0" />
+    <TextField fx:id="roomSizeReserve" editable="false" layoutX="479.0" layoutY="340.0" prefHeight="25.0" prefWidth="72.0" />
+    <TextField fx:id="rankReserve" editable="false" layoutX="437.0" layoutY="41.0" prefHeight="25.0" prefWidth="40.0" />
+    <TextArea fx:id="addressReserve" editable="false" layoutX="68.0" layoutY="357.0" prefHeight="137.0" prefWidth="322.0" wrapText="true" />
+    <Button fx:id="reserveButton" layoutX="407.0" layoutY="413.0" mnemonicParsing="false" onAction="#goPaymentPage" prefHeight="25.0" prefWidth="132.0" text="Make reservation" />
+    <Button layoutX="1.0" mnemonicParsing="false" onAction="#backReservationOnAction" style="-fx-background-color: transparant;" text="&lt;- Back" textFill="DODGERBLUE">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+    </Button>
+   <ImageView fx:id="rankPhoto" fitHeight="28.0" fitWidth="28.0" layoutX="407.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="https://cdn1.iconfinder.com/data/icons/christmas-flat-4/58/019_-_Star-512.png" />
+      </image></ImageView>
+   <Label layoutX="13.0" layoutY="323.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="54.0" text="Phone : " />
+   <Label layoutX="13.0" layoutY="357.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="54.0" text="Address :" />
+   <Label layoutX="13.0" layoutY="286.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="54.0" text="Website : " />
+   <Label layoutX="411.0" layoutY="344.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="72.0" text="Room size : " />
+   <Label layoutX="411.0" layoutY="383.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="72.0" text="Price : " />
+   <Label fx:id="currency" layoutX="555.0" layoutY="383.0" text="TL" />
+</AnchorPane>

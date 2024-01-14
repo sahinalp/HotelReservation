@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="paymentResultPage" minHeight="50.0" minWidth="550.0" prefHeight="251.0" prefWidth="550.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.PaymentResultController">
+   <Label fx:id="paymentResult" alignment="CENTER" layoutY="90.0" minWidth="550.0" prefHeight="72.0" prefWidth="550.0" text="Label" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="24.0" />
+      </font>
+   </Label>
+   <Button layoutX="484.0" layoutY="212.0" mnemonicParsing="false" onAction="#onOkClick" text="OK" />
+</AnchorPane>

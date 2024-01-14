@@ -3,15 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" onMouseEntered="#stageShowEventPaymentPage" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.HotelReservationController">
+<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0"  prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.PaymentController">
     <DatePicker fx:id="checkinDatePayment" layoutX="113.0" layoutY="88.0" />
     <DatePicker fx:id="checkoutDatePayment" layoutX="113.0" layoutY="128.0" />
-    <Button fx:id="backReservationPage" disable="false" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#goMainMenu" text="Back" visible="true" />
-    <Button fx:id="reserveReservationPage" disable="false" layoutX="724.0" layoutY="539.0" mnemonicParsing="false" onAction="#onMakeReservation" prefHeight="25.0" prefWidth="80.0" text="Reserve" visible="true" />
+    <Button fx:id="backReservationPage"  layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#goHome" text="Back"  />
+    <Button fx:id="reserveReservationPage"  layoutX="724.0" layoutY="539.0" mnemonicParsing="false" onAction="#onMakeReservation" prefHeight="25.0" prefWidth="80.0" text="Reserve" />
     <Label fx:id="label2" layoutX="30.0" layoutY="92.0" text="Check in date" />
     <Label fx:id="label3" layoutX="26.0" layoutY="132.0" text="Check out date" />
-    <TextField fx:id="hotelNamePayment" disable="false" editable="false" layoutX="102.0" layoutY="50.0" prefHeight="25.0" prefWidth="529.0" visible="true" />
-    <TextField fx:id="pricePayment" disable="false" editable="false" layoutX="690.0" layoutY="507.0" visible="true" />
+    <TextField fx:id="hotelNamePayment" editable="false" layoutX="102.0" layoutY="50.0" prefHeight="25.0" prefWidth="529.0"  />
+    <TextField fx:id="pricePayment"  editable="false" layoutX="690.0" layoutY="507.0"  />
     <TextField layoutX="200.0" layoutY="266.0" prefHeight="25.0" prefWidth="405.0" />
     <TextField layoutX="200.0" layoutY="302.0" />
     <TextField layoutX="456.0" layoutY="302.0" />

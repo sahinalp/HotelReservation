@@ -17,18 +17,17 @@ import java.util.ArrayList;
 public class HotelReservationApplication extends Application {
     public static Connection connection;
     public static DbHelper dbHelper;
-//    static Stage stage;
 
     public static boolean isLoggedIn =false;
     @Override
     public void start(Stage _stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 287, 382);
-        HotelReservationController.stage = new Stage();
-        HotelReservationController.stage.setTitle("Login");
-        HotelReservationController.stage.setScene(scene);
+        HomeController.stage = new Stage();
+        HomeController.stage.setTitle("Login");
+        HomeController.stage.setScene(scene);
 
-        HotelReservationController.stage.show();
+        HomeController.stage.show();
 
     }
 
@@ -36,9 +35,7 @@ public class HotelReservationApplication extends Application {
         dbHelper = new DbHelper();
         try {
             connection = dbHelper.getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         launch();
