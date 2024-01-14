@@ -81,7 +81,7 @@ public class CustomerManager implements ICustomerService {
             );
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("error");
+            throw new RuntimeException(e);
         }
 
         if (customer.isCustomer(username, password)) {

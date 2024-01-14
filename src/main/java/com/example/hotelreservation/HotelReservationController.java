@@ -114,8 +114,21 @@ public class HotelReservationController {
     protected void onSignInButtonClick() throws IOException {
 
         boolean canLogin = false;
-        canLogin = customerManager.login(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-                username.getText(), password.getText());
+        boolean isUser = true;
+        try
+        {
+
+            canLogin = customerManager.login(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
+                    username.getText(), password.getText());
+        }
+        catch (Exception e)
+        {
+            isUser=false;
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Error!!");
+            a.setHeaderText("User couldn't found");
+            a.show();
+        }
 
         if (canLogin) {
             FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("home.fxml"));
@@ -131,10 +144,10 @@ public class HotelReservationController {
 //            Platform.runLater(() -> this.stageShowEvent());
 
 
-        } else {
+        } else if(isUser) {
             Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Hata!!");
-            a.setHeaderText("Hatalı şifre");
+            a.setTitle("Error!!");
+            a.setHeaderText("Wrong Password");
             a.show();
         }
     }
