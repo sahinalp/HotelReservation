@@ -124,7 +124,7 @@ public class HotelReservationController {
                 username.getText(), password.getText());
 
         if (canLogin) {
-            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 894, 604);
             stage.setTitle("Hotel Reservation");
             stage.setScene(scene);
@@ -149,7 +149,7 @@ public class HotelReservationController {
     protected void onContinueWithoutLogin() throws IOException {
         HotelReservationApplication.isLoggedIn = false;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("home.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 894, 604);
         stage.setTitle("Hotel Reservation");
         stage.setScene(scene);
@@ -476,7 +476,7 @@ public class HotelReservationController {
     protected void onbackHome() {
         isStageShowEventRun = false;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 894, 604);
             stage.setTitle("Hotel Reservation");
             stage.setScene(scene);

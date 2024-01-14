@@ -30,7 +30,7 @@ public class PaymentController implements Initializable {
     public Label label2;
     public Button reserveReservationPage;
     public Button backReservationPage;
-    PaymentDetailController detailController = new PaymentDetailController();
+    ReservationDetailController detailController = new ReservationDetailController();
     IReservationService reservationService = new ReservationManager();
 
     public DatePicker checkinDatePayment;

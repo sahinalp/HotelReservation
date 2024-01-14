@@ -73,6 +73,20 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        checkinDate.setDayCellFactory(picker->new DateCell(){
+            public  void updateItem(LocalDate date,boolean empty){
+                super.updateItem(date,empty);
+                LocalDate today = LocalDate.now();
+                setDisable(empty|| date.isBefore(today));
+            }
+        });
+        checkoutDate.setDayCellFactory(picker->new DateCell(){
+            public  void updateItem(LocalDate date,boolean empty){
+                super.updateItem(date,empty);
+                LocalDate today = LocalDate.now();
+                setDisable(empty|| date.isBefore(today));
+            }
+        });
         LocalDate minCheckinDate = LocalDate.now();
         LocalDate minCheckoutDate = LocalDate.now().plusDays(1);
         checkinDate.setValue(minCheckinDate);
@@ -206,7 +220,7 @@ public class HomeController implements Initializable {
     @FXML
     protected void onUserMenu1() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("UserInfo.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("profile.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 453, 604);
             stage.setTitle(customer.getName() + " " + customer.getSurname());
             stage.setScene(scene);
@@ -222,7 +236,7 @@ public class HomeController implements Initializable {
     @FXML
     protected void onUserMenu2() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("OldReservations.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("my-reservations.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Old Hotel Reservations");
             stage.setScene(scene);
@@ -374,7 +388,7 @@ public class HomeController implements Initializable {
         selectedHotelName = hotel.getName();
         selectedRoomPrice = reservationRoom.getPrice().toString();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("payment-detail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("reservation-detail.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Reservation Detail");
         stage.setScene(scene);

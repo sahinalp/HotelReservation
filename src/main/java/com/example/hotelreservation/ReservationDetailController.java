@@ -14,12 +14,11 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.ResourceBundle;
 
 import static com.example.hotelreservation.HomeController.*;
 
-public class PaymentDetailController implements Initializable {
+public class ReservationDetailController implements Initializable {
     public ImageView roomImageReserve=new ImageView();
     public TextArea facilitiesReserve;
     public TextField priceReserve;
@@ -62,7 +61,7 @@ public class PaymentDetailController implements Initializable {
     protected void goPaymentPage() {
         if (customer != null) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("PaymentPage.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("payment.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 894, 604);
                 stage.setTitle("Payment Page");
                 stage.setScene(scene);
@@ -82,7 +81,7 @@ public class PaymentDetailController implements Initializable {
 
     @FXML
     protected void backReservationOnAction() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("home.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hotel Reservation");
         stage.setScene(scene);
@@ -103,7 +102,7 @@ public class PaymentDetailController implements Initializable {
     @FXML
     protected void goMainMenu() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("Home.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 894, 604);
             stage.setTitle("Hotel Reservation");
             stage.setScene(scene);

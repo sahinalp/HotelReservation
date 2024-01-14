@@ -21,17 +21,11 @@
             </font>
          </Button>
          <Button graphicTextGap="0.0" layoutX="47.0" layoutY="175.0" mnemonicParsing="false" onAction="#onContinueWithoutLogin" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: none;" text="Continue without login" />
-         <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="203.0" text="Can't sign in?" />
-         <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="226.0" onAction="#onSignUp" text="Create Account">
+         <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="213.0" onAction="#onSignUp" text="Create Account">
             <font>
                <Font name="Times New Roman" size="12.0" />
             </font>
          </Hyperlink>
-         <Button alignment="BOTTOM_RIGHT" contentDisplay="TOP" layoutX="191.0" layoutY="266.0" mnemonicParsing="false" style="-fx-background-color: red;" text="EXIT" textFill="WHITE">
-            <font>
-               <Font name="System Bold" size="12.0" />
-            </font>
-         </Button>
          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="-16.0" prefHeight="65.0" prefWidth="167.0" text="HOTEL RESERVATION APP" textAlignment="CENTER" textFill="#188cf8" wrapText="true">
             <font>
                <Font name="System Bold" size="18.0" />

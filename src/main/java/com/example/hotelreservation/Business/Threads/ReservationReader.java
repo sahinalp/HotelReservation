@@ -2,7 +2,7 @@ package com.example.hotelreservation.Business.Threads;
 
 import com.example.hotelreservation.Business.Abstract.IReservationService;
 import com.example.hotelreservation.Core.DbHelper;
-import com.example.hotelreservation.OldReservationController;
+import com.example.hotelreservation.MyReservationController;
 
 import java.sql.Connection;
 
@@ -25,6 +25,6 @@ public class ReservationReader implements Runnable {
 
     @Override
     public void run() {
-        OldReservationController.oldReservationsArrayList = reservationService.getAllOldReservations(dbHelper, connection, customerID);
+        MyReservationController.oldReservationsArrayList = reservationService.getAllOldReservations(dbHelper, connection, customerID);
     }
 }

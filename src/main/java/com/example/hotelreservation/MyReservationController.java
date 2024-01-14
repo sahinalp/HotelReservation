@@ -29,7 +29,7 @@ import static com.example.hotelreservation.HomeController.customer;
 import static com.example.hotelreservation.HomeController.reservationRoom;
 import static com.example.hotelreservation.HotelReservationController.reservationResult;
 
-public class OldReservationController implements Initializable {
+public class MyReservationController implements Initializable {
     ExecutorService executorService =null;
     Lock lock = new ReentrantLock();
     public Button backOldReservations;
@@ -60,7 +60,7 @@ public class OldReservationController implements Initializable {
     private int reservationID;
 
     HotelsManager hotelsManager = new HotelsManager();
-    PaymentDetailController paymentDetailController = new PaymentDetailController();
+    ReservationDetailController paymentDetailController = new ReservationDetailController();
     private String checinDate;
 
     @Override

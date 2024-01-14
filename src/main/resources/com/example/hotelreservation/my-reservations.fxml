@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.OldReservationController">
+<AnchorPane maxHeight="604.0" maxWidth="894.0" minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.MyReservationController">
     <Button fx:id="backOldReservations" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: transparant;" text="&lt;- Back" textFill="DODGERBLUE">
       <font>
          <Font name="System Bold" size="12.0" />

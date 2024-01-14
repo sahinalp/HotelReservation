@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.PaymentDetailController">
+<AnchorPane minHeight="604.0" minWidth="894.0" prefHeight="604.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.ReservationDetailController">
     <ImageView fx:id="roomImageReserve" fitHeight="228.0" fitWidth="376.0" layoutX="13.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
     <TextArea fx:id="facilitiesReserve" editable="false" layoutX="405.0" layoutY="180.0" prefHeight="143.0" prefWidth="483.0" />
     <TextArea fx:id="descriptionReserve" editable="false" layoutX="405.0" layoutY="78.0" prefHeight="95.0" prefWidth="483.0" wrapText="true" />
@@ -32,6 +32,6 @@
    <Label layoutX="411.0" layoutY="344.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="72.0" text="Room size : " />
    <Label layoutX="411.0" layoutY="383.0" minHeight="17.0" minWidth="54.0" prefHeight="17.0" prefWidth="72.0" text="Price : " />
    <Label fx:id="currency" layoutX="555.0" layoutY="383.0" text="TL" />
-    <Label fx:id="roomSize" layoutX="555.0" layoutY="344.0" prefHeight="17.0" prefWidth="12.0" text="m" />
-    <Label fx:id="roomSize" layoutX="564.0" layoutY="336.0" text="2" />
+    <Label layoutX="555.0" layoutY="344.0" prefHeight="17.0" prefWidth="12.0" text="m" />
+    <Label layoutX="564.0" layoutY="336.0" text="2" />
 </AnchorPane>

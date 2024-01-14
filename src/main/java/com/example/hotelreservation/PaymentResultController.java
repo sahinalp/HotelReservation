@@ -11,7 +11,7 @@ import static com.example.hotelreservation.HotelReservationController.reservatio
 public class PaymentResultController implements Initializable {
     public Label paymentResult=new Label();
     public AnchorPane paymentResultPage= new AnchorPane();
-    PaymentDetailController detailController = new PaymentDetailController();
+    ReservationDetailController detailController = new ReservationDetailController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
