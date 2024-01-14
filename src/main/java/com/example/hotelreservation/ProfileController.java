@@ -21,7 +21,6 @@ import static com.example.hotelreservation.HotelReservationController.reservatio
 
 public class ProfileController implements Initializable {
     public TextField usernameUserInfo;
-    public TextField passwordUserInfo;
     public TextField mailUserInfo;
     public TextField nameUserInfo;
     public TextField surnameUserInfo;
@@ -37,7 +36,6 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameUserInfo.setText(customer.getUsername());
-        passwordUserInfo.setText(customer.getPassword());
         mailUserInfo.setText(customer.getMail());
         nameUserInfo.setText(customer.getName());
         surnameUserInfo.setText(customer.getSurname());
@@ -68,7 +66,6 @@ public class ProfileController implements Initializable {
         customer.setIdentificationNumber(identificationNumberUserInfo.getText());
         customer.setMail(mailUserInfo.getText());
         customer.setName(nameUserInfo.getText());
-        customer.setPassword(passwordUserInfo.getText());
         customer.setPhone(phoneUserInfo.getText());
         customer.setSurname(surnameUserInfo.getText());
         customer.setUsername(usernameUserInfo.getText());
