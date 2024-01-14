@@ -29,7 +29,8 @@ public class ReservationWriter implements Runnable {
 
 
     // create constructor
-    public ReservationWriter(IReservationService reservationService, boolean makeReservation, DbHelper dbHelper, Connection connection, Room room, int reservationID, Customer customer, String checkInDate, String checkOutDate) {
+    public ReservationWriter(IReservationService reservationService, boolean makeReservation, DbHelper dbHelper,
+                             Connection connection, Room room, int reservationID, Customer customer, String checkInDate, String checkOutDate) {
         this.reservationService = reservationService;
         this.makeReservation = makeReservation;
         this.dbHelper = dbHelper;
