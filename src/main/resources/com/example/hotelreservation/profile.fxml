@@ -3,28 +3,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="604.0" maxWidth="453.0" minHeight="604.0" minWidth="453.0"  prefHeight="604.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.ProfileController">
+<AnchorPane maxHeight="604.0" maxWidth="453.0" minHeight="604.0" minWidth="453.0" prefHeight="604.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelreservation.ProfileController">
 
-    <Button fx:id="backHome" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#onbackHome" text="Back"  />
+    <Button fx:id="backHome" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#onbackHome" text="Back" />
    <Label layoutX="118.0" layoutY="126.0" prefHeight="25.0" prefWidth="67.0" text="Username" />
    <TextField fx:id="usernameUserInfo" layoutX="185.0" layoutY="126.0" />
-    <Label layoutX="118.0" layoutY="161.0" prefHeight="25.0" prefWidth="67.0" text="Password" />
-    <TextField fx:id="passwordUserInfo" editable="false" layoutX="185.0" layoutY="161.0" />
-    <Label layoutX="118.0" layoutY="196.0" prefHeight="25.0" prefWidth="67.0" text="Mail" />
-    <TextField fx:id="mailUserInfo" layoutX="185.0" layoutY="196.0" />
-    <Label layoutX="118.0" layoutY="231.0" prefHeight="25.0" prefWidth="67.0" text="Name" />
-    <TextField fx:id="nameUserInfo" layoutX="185.0" layoutY="231.0" />
-    <Label layoutX="118.0" layoutY="266.0" prefHeight="25.0" prefWidth="67.0" text="Surname" />
-    <TextField fx:id="surnameUserInfo" layoutX="185.0" layoutY="266.0" />
-    <Label layoutX="118.0" layoutY="301.0" prefHeight="25.0" prefWidth="67.0" text="Identification Number" />
-    <TextField fx:id="identificationNumberUserInfo" layoutX="185.0" layoutY="301.0" />
-    <Label layoutX="118.0" layoutY="336.0" prefHeight="25.0" prefWidth="67.0" text="BirthDate" />
-    <TextField fx:id="birthDateUserInfo" layoutX="185.0" layoutY="336.0" />
-    <Label layoutX="118.0" layoutY="371.0" prefHeight="25.0" prefWidth="67.0" text="Phone" />
-    <TextField fx:id="phoneUserInfo" layoutX="185.0" layoutY="371.0" />
-    <Label layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="67.0" text="Gender" />
-    <Button fx:id="saveUserInfo" layoutX="248.0" layoutY="450.0" mnemonicParsing="false" onAction="#onSaveUserInfo" prefHeight="25.0" prefWidth="86.0" text="Save" />
-   <SplitMenuButton fx:id="genderMenuProfile" layoutX="186.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="SplitMenuButton">
+    <Label layoutX="118.0" layoutY="163.0" prefHeight="25.0" prefWidth="67.0" text="Mail" />
+    <TextField fx:id="mailUserInfo" layoutX="185.0" layoutY="163.0" />
+    <Label layoutX="118.0" layoutY="198.0" prefHeight="25.0" prefWidth="67.0" text="Name" />
+    <TextField fx:id="nameUserInfo" layoutX="185.0" layoutY="198.0" />
+    <Label layoutX="118.0" layoutY="233.0" prefHeight="25.0" prefWidth="67.0" text="Surname" />
+    <TextField fx:id="surnameUserInfo" layoutX="185.0" layoutY="233.0" />
+    <Label layoutX="118.0" layoutY="268.0" prefHeight="25.0" prefWidth="67.0" text="Identification Number" />
+    <TextField fx:id="identificationNumberUserInfo" layoutX="185.0" layoutY="268.0" />
+    <Label layoutX="118.0" layoutY="303.0" prefHeight="25.0" prefWidth="67.0" text="BirthDate" />
+    <TextField fx:id="birthDateUserInfo" layoutX="185.0" layoutY="303.0" />
+    <Label layoutX="118.0" layoutY="338.0" prefHeight="25.0" prefWidth="67.0" text="Phone" />
+    <TextField fx:id="phoneUserInfo" layoutX="185.0" layoutY="338.0" />
+    <Label layoutX="118.0" layoutY="373.0" prefHeight="25.0" prefWidth="67.0" text="Gender" />
+    <Button fx:id="saveUserInfo" layoutX="248.0" layoutY="417.0" mnemonicParsing="false" onAction="#onSaveUserInfo" prefHeight="25.0" prefWidth="86.0" text="Save" />
+   <SplitMenuButton fx:id="genderMenuProfile" layoutX="186.0" layoutY="373.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="SplitMenuButton">
      <items>
       <MenuItem fx:id="womanRegister" mnemonicParsing="false" onAction="#changeGender1" text="Woman" />
       <MenuItem fx:id="manRegister" mnemonicParsing="false" onAction="#changeGender2" text="Man" />
