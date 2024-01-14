@@ -16,15 +16,17 @@ public class ReservationManager implements IReservationService {
     // lock to control synchronization with this buffer
     private final Lock lock = new ReentrantLock();
 
+    // make reservation
     @Override
     public synchronized int makeReservation(DbHelper dbHelper, Connection connection, Room room, Customer customer, String checkInDate, String checkOutDate) {
-        lock.lock();
-        int result;
+        lock.lock();        // lock this buffer to control synchronization
+        int result;         // result of the operation
         try {
-            // Set room's isFull as true
             try {
+                // get room from database
                 ResultSet resultSet = dbHelper.getEntity(connection, "room", room, room.getID());
                 resultSet.next();
+                // check if room is full
                 boolean isRoomFull = resultSet.getBoolean(4);
                 if (!isRoomFull) {
                     result = dbHelper.update(connection, "room", "\"isFull\"=true", room.getID());
@@ -46,40 +48,46 @@ public class ReservationManager implements IReservationService {
             }
 
         } finally {
+            // unlock this buffer
             lock.unlock();
         }
         //if 1 then insert is successful
         return result;
     }
 
+    // cancel reservation
     @Override
     public synchronized int cancelReservation(DbHelper dbHelper, Connection connection, Room room, int reservationID) {
-        lock.lock();
-        int result;
+        lock.lock();        // lock this buffer to control synchronization
+        int result;         // result of the operation
         try {
+            // delete reservation from database
             result = dbHelper.delete(connection, "reservation", reservationID);
+            // if delete is successful update room as isFull=false
             if (result == 1) {
                 result = dbHelper.update(connection, "room", "\"isFull\"=false", room.getID());
             } else {
                 result = 0;
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
+            // unlock this buffer
             lock.unlock();
         }
+        //if 1 then delete is successful
         return result;
     }
-    
+
+    // get all reservations of a customer
     public synchronized ArrayList<OldReservations> getAllMyReservations(DbHelper dbHelper, Connection connection, int customerID) {
         ResultSet resultSet;
-
         ArrayList<OldReservations> oldReservationsArrayList = new ArrayList<>();
         try {
-            lock.lock();
+            lock.lock(); // lock this buffer to control synchronization
+            // get all reservations of a customer from database
             resultSet = dbHelper.getListOfOldReservations(connection, customerID);
-
+            // add all reservations to arraylist
             while (resultSet.next()) {
                 oldReservationsArrayList.add(new OldReservations(
                         resultSet.getInt(1),
@@ -93,11 +101,14 @@ public class ReservationManager implements IReservationService {
                         resultSet.getString(9)
                 ));
             }
+            // close resultset
             resultSet.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        // unlock this buffer
         lock.unlock();
+        // return arraylist
         return oldReservationsArrayList;
     }
 }

@@ -11,8 +11,10 @@ import java.sql.SQLException;
 
 public class CustomerManager implements ICustomerService {
 
+    // register customer
     @Override
     public int register(DbHelper dbHelper, Connection connection, Customer customer) {
+        // insert customer to database
         int result;
         try {
             result = dbHelper.insert(connection, "customer", customer);
@@ -22,13 +24,13 @@ public class CustomerManager implements ICustomerService {
         return result;
     }
 
+    // get total customer from database
     public int getTotalUser(DbHelper dbHelper, Connection connection) {
         ResultSet resultSet;
         Customer customer = new Customer();
         int count = 0;
         try {
             resultSet = dbHelper.getEntity(connection, "customer", customer);
-
             while (resultSet.next()) {
                 count++;
             }
@@ -39,9 +41,10 @@ public class CustomerManager implements ICustomerService {
         return count;
     }
 
+    // update customer information from database
     @Override
     public int updateInfo(DbHelper dbHelper, Connection connection, Customer customer) {
-        String script = "\"mail\"='" + customer.getMail() + "'"  +
+        String script = "\"mail\"='" + customer.getMail() + "'" +
                 ", \"username\"='" + customer.getUsername() + "'" +
                 ", \"password\"='" + customer.getPassword() +
                 "', \"name\"='" + customer.getName() +
@@ -59,6 +62,7 @@ public class CustomerManager implements ICustomerService {
         return result;
     }
 
+    // login customer from database
     @Override
     public boolean login(DbHelper dbHelper, Connection connection, String username, String password) {
         ResultSet resultSet;
@@ -89,7 +93,5 @@ public class CustomerManager implements ICustomerService {
             return true;
         }
         return false;
-
-
     }
 }

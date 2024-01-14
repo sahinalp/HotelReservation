@@ -11,14 +11,13 @@ import java.util.ArrayList;
 
 public class HotelsManager implements IHotelsManager {
 
+    // Get all rooms from database
     @Override
     public ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection,String script,int dateDiff) {
         ResultSet resultSet;
-
         ArrayList<HotelRoom> roomsArrayList = new ArrayList<HotelRoom>();
         try {
             resultSet=dbHelper.getListOfRooms(connection, script);
-
             while (resultSet.next())
             {
                 roomsArrayList.add(new HotelRoom(
@@ -40,6 +39,7 @@ public class HotelsManager implements IHotelsManager {
         return roomsArrayList;
     }
 
+    // get room from database
     @Override
     public Room getRoom(DbHelper dbHelper,Connection connection, int ID) {
         ResultSet resultSet;
@@ -66,6 +66,7 @@ public class HotelsManager implements IHotelsManager {
         return room;
 
     }
+    // get hotel from database
     @Override
     public Hotel getHotel(DbHelper dbHelper,Connection connection, int ID) {
         ResultSet resultSet;
