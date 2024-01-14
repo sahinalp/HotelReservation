@@ -7,10 +7,11 @@ import java.sql.Connection;
 
 public interface ICustomerService {
 
-    int register(DbHelper dbHelper,Connection connection, Customer customer);
-    int getTotalUser(DbHelper dbHelper,Connection connection);
+    // customer service interface for register, update, login and get total user
+    int register(DbHelper dbHelper,Connection connection, Customer customer); // register customer
+    int getTotalUser(DbHelper dbHelper,Connection connection);  // get total user
 
-    void updateInfo();
+    int updateInfo(DbHelper dbHelper,Connection connection, Customer customer);    // update customer info
 
-    boolean login(DbHelper dbHelper, Connection connection, String username, String password);
+    boolean login(DbHelper dbHelper, Connection connection, String username, String password);  // login customer
 }

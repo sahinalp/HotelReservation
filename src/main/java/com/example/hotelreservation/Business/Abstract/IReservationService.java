@@ -9,10 +9,11 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public interface IReservationService {
+    // reservation service interface for make reservation, cancel reservation and get all my reservations
     int makeReservation(DbHelper dbHelper, Connection connection, Room room, Customer customer, String checkInDate, String checkOutDate);
 
-    int cancelReservation(DbHelper dbHelper, Connection connection, Room room,int reservationID);
+    int cancelReservation(DbHelper dbHelper, Connection connection, Room room, int reservationID);
 
-    ArrayList<OldReservations> getAllOldReservations(DbHelper dbHelper, Connection connection, int customerID);
+    ArrayList<OldReservations> getAllMyReservations(DbHelper dbHelper, Connection connection, int customerID);
 
 }

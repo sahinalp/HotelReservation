@@ -9,10 +9,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public interface IHotelsManager {
+    //  get all rooms,hotel and room from database
+    ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection, String script, int dateDiff);
 
-    void getHotels();
-
-    ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection,String script,int dateDiff);
     Room getRoom(DbHelper dbHelper, Connection connection, int ID);
+
     Hotel getHotel(DbHelper dbHelper, Connection connection, int ID);
 }
