@@ -66,9 +66,13 @@ public class OldReservationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         oldReservationsList = FXCollections.observableArrayList();
-        lock.lock();
         executorService.execute(new ReservationReader(reservationService,HotelReservationApplication.dbHelper,HotelReservationApplication.connection,customer.getID()));
-        lock.unlock();
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         oldReservationsList.addAll(oldReservationsArrayList);
         oldReservationRoomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         oldReservationReservationID.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
