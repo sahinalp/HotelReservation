@@ -29,6 +29,7 @@ public class ReservationManager implements IReservationService {
                 // check if room is full
                 boolean isRoomFull = resultSet.getBoolean(4);
                 if (!isRoomFull) {
+                    // update room as isFull=true
                     result = dbHelper.update(connection, "room", "\"isFull\"=true", room.getID());
                 } else {
                     result = -1;
@@ -38,9 +39,11 @@ public class ReservationManager implements IReservationService {
             }
             // Setting room as isFull is successful
             if (result == 1) {
+                // create reservation object
                 Reservation reservation = new Reservation(customer.getID(),
                         room.getID(), room.getHotelID(), checkInDate, checkOutDate);
                 try {
+                    // insert reservation to database
                     result = dbHelper.insert(connection, "reservation", reservation);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -81,8 +84,8 @@ public class ReservationManager implements IReservationService {
 
     // get all reservations of a customer
     public synchronized ArrayList<OldReservations> getAllMyReservations(DbHelper dbHelper, Connection connection, int customerID) {
-        ResultSet resultSet;
-        ArrayList<OldReservations> oldReservationsArrayList = new ArrayList<>();
+        ResultSet resultSet; // create result set
+        ArrayList<OldReservations> oldReservationsArrayList = new ArrayList<>();// create arraylist
         try {
             lock.lock(); // lock this buffer to control synchronization
             // get all reservations of a customer from database
