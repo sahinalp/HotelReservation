@@ -36,9 +36,7 @@ public class ReservationManager implements IReservationService {
             }
             // Setting room as isFull is successful
             if (result == 1) {
-                int reservationID = getTotalReservation(dbHelper, connection);
-                reservationID++;
-                Reservation reservation = new Reservation(reservationID, customer.getID(),
+                Reservation reservation = new Reservation(customer.getID(),
                         room.getID(), room.getHotelID(), checkInDate, checkOutDate);
                 try {
                     result = dbHelper.insert(connection, "reservation", reservation);
