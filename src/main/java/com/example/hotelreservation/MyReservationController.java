@@ -93,7 +93,7 @@ public class MyReservationController implements Initializable {
     }
 
     @FXML
-    protected void getOldReservation() throws InterruptedException {
+    protected void getMyReservation()  {
         executorService= Executors.newCachedThreadPool();
         int selectedRoomIndex = roomListTableOldReservations.getSelectionModel().getSelectedIndex();
         if (selectedRoomIndex <= -1) {
@@ -102,7 +102,7 @@ public class MyReservationController implements Initializable {
         oldReservationsList = FXCollections.observableArrayList();
 
 
-        oldReservationsArrayList=reservationService.getAllOldReservations(HotelReservationApplication.dbHelper,
+        oldReservationsArrayList=reservationService.getAllMyReservations(HotelReservationApplication.dbHelper,
                 HotelReservationApplication.connection,customer.getID());
 
         oldReservationsList.addAll(oldReservationsArrayList);
@@ -124,7 +124,7 @@ public class MyReservationController implements Initializable {
     }
 
     @FXML
-    protected void onCancelReservationClick() throws IOException, InterruptedException {
+    protected void onCancelReservationClick() throws IOException {
         executorService= Executors.newCachedThreadPool();
         LocalDate today = LocalDate.now();
         String[] checinDateList = checinDate.split("/");

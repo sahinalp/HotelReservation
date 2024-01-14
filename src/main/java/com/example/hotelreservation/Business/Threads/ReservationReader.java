@@ -25,6 +25,6 @@ public class ReservationReader implements Runnable {
 
     @Override
     public void run() {
-        MyReservationController.oldReservationsArrayList = reservationService.getAllOldReservations(dbHelper, connection, customerID);
+        MyReservationController.oldReservationsArrayList = reservationService.getAllMyReservations(dbHelper, connection, customerID);
     }
 }

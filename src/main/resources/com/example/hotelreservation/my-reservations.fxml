@@ -10,7 +10,7 @@
          <Font name="System Bold" size="12.0" />
       </font></Button>
 
-    <TableView fx:id="roomListTableOldReservations" layoutX="17.0" layoutY="96.0" onMouseClicked="#getOldReservation" prefHeight="449.0" prefWidth="862.0">
+    <TableView fx:id="roomListTableOldReservations" layoutX="17.0" layoutY="96.0" onMouseClicked="#getMyReservation" prefHeight="449.0" prefWidth="862.0">
         <columns>
             <TableColumn fx:id="oldReservationRoomID" prefWidth="75.0" text="ID" visible="false" />
             <TableColumn fx:id="oldReservationReservationID" prefWidth="75.0" text="ID" visible="false" />

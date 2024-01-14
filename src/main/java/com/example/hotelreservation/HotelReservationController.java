@@ -79,8 +79,6 @@ public class HotelReservationController {
     private MenuItem otherRegister;
 
 
-
-
     ObservableList<HotelRoom> hotelRoomList = null;
     ArrayList<HotelRoom> roomsArrayList = null;
 
@@ -104,16 +102,12 @@ public class HotelReservationController {
     private TextField genderUserInfo;
 
 
-
     private static boolean isStageShowEventRun = false;
     CustomerManager customerManager = new CustomerManager();
 
 
-
-
     private String mailSenderMail = null;
     private String mailSenderPassword = null;
-
 
 
     @FXML
@@ -170,8 +164,6 @@ public class HotelReservationController {
         } catch (IOException e) {
             System.out.println(e.toString());
         }
-
-
     }
 
     @FXML
@@ -237,9 +229,6 @@ public class HotelReservationController {
             }
         }
 
-//        Stage stage = new Stage();
-
-
     }
 
     protected void sendMail() {
@@ -290,181 +279,8 @@ public class HotelReservationController {
         Scene scene = new Scene(fxmlLoader.load(), 287, 382);
         stage.setTitle("Login");
         stage.setScene(scene);
-
         stage.show();
     }
-
-
-
-
-//
-//    @FXML
-//    private void changeMenu() {
-//        if (menu == 1) {
-//            menu = 2;
-//            label1.setVisible(false);
-//            label2.setVisible(false);
-//            label3.setVisible(false);
-//            label4.setVisible(false);
-//            label5.setVisible(false);
-//
-//            roomTypeMenu.setVisible(false);
-//
-//            checkinDate.setVisible(false);
-//            checkoutDate.setVisible(false);
-//            currency.setVisible(false);
-//            order.setVisible(false);
-//            roomListTable.setVisible(false);
-//            city.setVisible(false);
-//            slider.setVisible(false);
-//            price.setVisible(false);
-//            userMenu.setVisible(false);
-//            refresh.setVisible(false);
-//            roomImageReserve.setVisible(true);
-//            reserveButton.setVisible(true);
-//            facilitiesReserve.setVisible(true);
-//            descriptionReserve.setVisible(true);
-//            priceReserve.setVisible(true);
-//            hotelNameReserve.setVisible(true);
-//            websiteReserve.setVisible(true);
-//            telNoReserve.setVisible(true);
-//            roomSizeReserve.setVisible(true);
-//            rankReserve.setVisible(true);
-//            addressReserve.setVisible(true);
-//            backReserve.setVisible(true);
-//            roomImageReserve.setDisable(false);
-//            reserveButton.setDisable(false);
-//            facilitiesReserve.setDisable(false);
-//            descriptionReserve.setDisable(false);
-//            priceReserve.setDisable(false);
-//            hotelNameReserve.setDisable(false);
-//            websiteReserve.setDisable(false);
-//            telNoReserve.setDisable(false);
-//            roomSizeReserve.setDisable(false);
-//            rankReserve.setDisable(false);
-//            addressReserve.setDisable(false);
-//            backReserve.setDisable(false);
-//
-//
-//            userLogin.setVisible(false);
-//            userLogin.setDisable(true);
-//            userMenu.setVisible(false);
-//            userMenu.setDisable(true);
-//            roomTypeMenu.setVisible(false);
-//
-//
-//        } else {
-//            menu = 1;
-//            label1.setVisible(true);
-//            label2.setVisible(true);
-//            label3.setVisible(true);
-//            label4.setVisible(true);
-//            label5.setVisible(true);
-//            roomTypeMenu.setVisible(true);
-//            checkinDate.setVisible(true);
-//            checkoutDate.setVisible(true);
-//            currency.setVisible(true);
-//            order.setVisible(true);
-//            roomListTable.setVisible(true);
-//            city.setVisible(true);
-//            slider.setVisible(true);
-//            price.setVisible(true);
-//            refresh.setVisible(true);
-//            roomImageReserve.setVisible(false);
-//            reserveButton.setVisible(false);
-//            facilitiesReserve.setVisible(false);
-//            descriptionReserve.setVisible(false);
-//            priceReserve.setVisible(false);
-//            hotelNameReserve.setVisible(false);
-//            websiteReserve.setVisible(false);
-//            telNoReserve.setVisible(false);
-//            roomSizeReserve.setVisible(false);
-//            rankReserve.setVisible(false);
-//            addressReserve.setVisible(false);
-//            backReserve.setVisible(false);
-//
-//            roomTypeMenu.setVisible(true);
-//
-//            if (customer != null) {
-//                userLogin.setVisible(false);
-//                userLogin.setDisable(true);
-//                userMenu.setVisible(true);
-//                userMenu.setDisable(false);
-//            } else {
-//                userLogin.setVisible(true);
-//                userLogin.setDisable(false);
-//                userMenu.setVisible(false);
-//                userMenu.setDisable(true);
-//            }
-//        }
-//    }
-
-
-
-    //    @FXML
-//    protected void stageShowEvent() {
-//        if (!isStageShowEventRun) {
-//            isStageShowEventRun = true;
-//            try {
-//                this.onRefreshButtonClick();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            if(customer!=null) {
-//                userMenu.setText(customer.getName() + " " + customer.getSurname());
-//                userLogin.setVisible(false);
-//                userLogin.setDisable(true);
-//                userMenu.setVisible(true);
-//                userMenu.setDisable(false);
-//                LocalDate minCheckinDate = LocalDate.now();
-//                LocalDate minCheckoutDate = LocalDate.now().plusDays(1);
-//                checkinDate.setValue(minCheckinDate);
-//                checkoutDate.setValue(minCheckoutDate);
-//
-//            }
-//
-//        }
-//    }
-    @FXML
-    protected void stageShowEventUserInfo() {
-        if (!isStageShowEventRun) {
-            isStageShowEventRun = true;
-            if (customer != null) {
-
-                usernameUserInfo.setText(customer.getUsername());
-                passwordUserInfo.setText(customer.getPassword());
-                mailUserInfo.setText(customer.getMail());
-                nameUserInfo.setText(customer.getName());
-                surnameUserInfo.setText(customer.getSurname());
-                identificationNumberUserInfo.setText(customer.getIdentificationNumber());
-                birthDateUserInfo.setText(customer.getBirthDate());
-                phoneUserInfo.setText(customer.getPhone());
-                String gender = "Other";
-                if (customer.getGender() == 0)
-                    gender = "Woman";
-                else if (customer.getGender() == 1)
-                    gender = "Man";
-                genderUserInfo.setText(gender);
-
-
-            }
-
-        }
-    }
-
-//    @FXML
-//    protected void stageShowEventPaymentPage() {
-//        if (!isStageShowEventRun) {
-//            isStageShowEventRun = true;
-//
-//            checkinDatePayment.setValue(selectedCheckinDate);
-//            checkoutDatePayment.setValue(selectedCheckoutDate);
-//            hotelNamePayment.setText(selectedHotelName);
-//            pricePayment.setText(selectedRoomPrice);
-//
-//
-//        }
-//    }
 
     public static void setCustomer(Customer _customer) {
         customer = _customer;
@@ -472,30 +288,7 @@ public class HotelReservationController {
     }
 
 
-    @FXML
-    protected void onbackHome() {
-        isStageShowEventRun = false;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HotelReservationApplication.class.getResource("home.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 894, 604);
-            stage.setTitle("Hotel Reservation");
-            stage.setScene(scene);
 
-            stage.centerOnScreen();
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    @FXML
-    protected void onSaveUserInfo() {
-        System.out.println(customer.getID());
-
-    }
 
 
 }

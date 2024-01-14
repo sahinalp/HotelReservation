@@ -72,7 +72,7 @@ public class ReservationManager implements IReservationService {
         return result;
     }
     
-    public synchronized ArrayList<OldReservations> getAllOldReservations(DbHelper dbHelper, Connection connection, int customerID) {
+    public synchronized ArrayList<OldReservations> getAllMyReservations(DbHelper dbHelper, Connection connection, int customerID) {
         ResultSet resultSet;
 
         ArrayList<OldReservations> oldReservationsArrayList = new ArrayList<>();

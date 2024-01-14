@@ -12,11 +12,6 @@ import java.util.ArrayList;
 public class HotelsManager implements IHotelsManager {
 
     @Override
-    public void getHotels() {
-
-    }
-
-    @Override
     public ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection,String script,int dateDiff) {
         ResultSet resultSet;
 
