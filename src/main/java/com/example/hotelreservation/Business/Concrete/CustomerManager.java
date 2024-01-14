@@ -12,25 +12,24 @@ import java.sql.SQLException;
 public class CustomerManager implements ICustomerService {
 
     @Override
-    public int register(DbHelper dbHelper,Connection connection, Customer customer) {
+    public int register(DbHelper dbHelper, Connection connection, Customer customer) {
         int result;
         try {
-            result=dbHelper.insert(connection,"customer",customer);
+            result = dbHelper.insert(connection, "customer", customer);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return result;
     }
-    public int getTotalUser(DbHelper dbHelper,Connection connection)
-    {
+
+    public int getTotalUser(DbHelper dbHelper, Connection connection) {
         ResultSet resultSet;
         Customer customer = new Customer();
-        int count=0;
+        int count = 0;
         try {
-            resultSet=dbHelper.getEntity(connection,"customer",customer);
+            resultSet = dbHelper.getEntity(connection, "customer", customer);
 
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 count++;
             }
             resultSet.close();
@@ -41,37 +40,51 @@ public class CustomerManager implements ICustomerService {
     }
 
     @Override
-    public void updateInfo() {
-
+    public int updateInfo(DbHelper dbHelper, Connection connection, Customer customer) {
+        String script = "\"mail\"='" + customer.getMail() + "'"  +
+                ", \"username\"='" + customer.getUsername() + "'" +
+                ", \"password\"='" + customer.getPassword() +
+                "', \"name\"='" + customer.getName() +
+                "', \"surname\"='" + customer.getSurname() +
+                "', \"phone\"='" + customer.getPhone() +
+                "', \"identificationNumber\"='" + customer.getIdentificationNumber() +
+                "', \"birthDate\"='" + customer.getBirthDate() + "'" +
+                ", \"gender\"='" + customer.getGender() + "'";
+        int result = 0;
+        try {
+            result = dbHelper.update(connection, "customer", script, customer.getID());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 
     @Override
-    public boolean login(DbHelper dbHelper,Connection connection, String username,String password) {
+    public boolean login(DbHelper dbHelper, Connection connection, String username, String password) {
         ResultSet resultSet;
         Customer customer = new Customer();
-        String script="WHERE username = '"+username+"' ";
+        String script = "WHERE username = '" + username + "' ";
         try {
-            resultSet=dbHelper.getEntity(connection,"customer",customer,script);
+            resultSet = dbHelper.getEntity(connection, "customer", customer, script);
             resultSet.next();
-                customer = new Customer(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getInt(10)
-                );
+            customer = new Customer(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getString(9),
+                    resultSet.getInt(10)
+            );
             resultSet.close();
         } catch (SQLException e) {
             System.out.println("error");
         }
 
-        if(customer.isCustomer(username,password))
-        {
+        if (customer.isCustomer(username, password)) {
             HotelReservationController.setCustomer(customer);
             return true;
         }
