@@ -12,7 +12,7 @@ public interface IHotelsManager {
 
     void getHotels();
 
-    ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection,String script);
+    ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection,String script,int dateDiff);
     Room getRoom(DbHelper dbHelper, Connection connection, int ID);
     Hotel getHotel(DbHelper dbHelper, Connection connection, int ID);
 }

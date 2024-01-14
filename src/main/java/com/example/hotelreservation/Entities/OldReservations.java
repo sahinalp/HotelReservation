@@ -1,5 +1,8 @@
 package com.example.hotelreservation.Entities;
 
+import java.time.Duration;
+import java.time.LocalDate;
+
 public class OldReservations {
     public int roomID;
     public int reservationID;
@@ -22,7 +25,12 @@ public class OldReservations {
         this.address = address;
         this.checkinDate=checkinDate;
         this.checkoutDay = checkoutDay;
-        this.priceCurrency = price.toString() +" "+currency;
+        String[] chekinDList=checkinDate.split("/");
+        LocalDate checkinD = LocalDate.parse(chekinDList[2] + "-" + chekinDList[1]+"-"+chekinDList[0]);
+        String[] chekinOList=checkoutDay.split("/");
+        LocalDate checkinO = LocalDate.parse(chekinOList[2] + "-" + chekinOList[1]+"-"+chekinOList[0]);
+        int dateDiff = (int) Duration.between(checkinD.atStartOfDay(),checkinO.atStartOfDay()).toDays();
+        this.priceCurrency = String.valueOf(price*dateDiff) +" "+currency;
     }
 
     public int getReservationID() {

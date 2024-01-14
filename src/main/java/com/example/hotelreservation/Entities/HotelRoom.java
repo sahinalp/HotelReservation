@@ -7,19 +7,26 @@ public class HotelRoom {
     public String address;
     public Double hotelRank;
     public String priceCurrency;
+    public String currency;
+    public Double price;
+
+    public int dateDiff;
 
     public HotelRoom() {
 
     }
 
-    public HotelRoom(int roomID, String hotelName, String roomType, String address, Double hotelRank, Double price, String currency) {
+    public HotelRoom(int roomID, String hotelName, String roomType, String address, Double hotelRank, Double price, String currency,int dateDiff) {
         this.roomID = roomID;
         this.hotelName = hotelName;
         this.roomType = roomType;
         this.address = address;
         this.hotelRank = hotelRank;
-        this.priceCurrency = price.toString() +" "+currency;
+        this.currency = currency;
+        this.price = price*dateDiff;
+        this.priceCurrency = String.valueOf(price*dateDiff) +" "+currency;
     }
+
 
     public HotelRoom(int roomID, String hotelName, String roomType, String address, Double hotelRank, String priceCurrency) {
         this.roomID = roomID;
@@ -28,6 +35,22 @@ public class HotelRoom {
         this.address = address;
         this.hotelRank = hotelRank;
         this.priceCurrency = priceCurrency;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public final int getRoomID() {

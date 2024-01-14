@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ResourceBundle;
 
 import static com.example.hotelreservation.HomeController.*;
@@ -47,7 +48,7 @@ public class PaymentDetailController implements Initializable {
         roomImageReserve.setImage(image);
         facilitiesReserve.setText(reservationRoom.getFacilities());
         descriptionReserve.setText(reservationRoom.getDescription());
-        priceReserve.setText(reservationRoom.getPrice().toString());
+        priceReserve.setText(String.valueOf((reservationRoom.getPrice()*dateDiff)));
         hotelNameReserve.setText(hotel.getName());
         websiteReserve.setText(hotel.getWebsite());
         telNoReserve.setText(hotel.getTelNo());

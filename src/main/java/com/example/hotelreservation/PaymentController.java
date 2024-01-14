@@ -41,7 +41,7 @@ public class PaymentController implements Initializable {
         checkinDatePayment.setValue(selectedCheckinDate);
         checkoutDatePayment.setValue(selectedCheckoutDate);
         hotelNamePayment.setText(selectedHotelName);
-        pricePayment.setText(selectedRoomPrice);
+        pricePayment.setText(String.valueOf(Double.parseDouble(selectedRoomPrice)*dateDiff));
     }
 
     @FXML
@@ -56,7 +56,8 @@ public class PaymentController implements Initializable {
         String checkinDate = checkinDateList[2] + "/" + checkinDateList[1] + "/" + checkinDateList[0];
         String checkoutDate = checkoutDateList[2] + "/" + checkoutDateList[1] + "/" + checkoutDateList[0];
         lock.lock();
-        executorService.execute(new ReservationWriter(reservationService, true, HotelReservationApplication.dbHelper, HotelReservationApplication.connection, reservationRoom, reservationRoom.getID(), customer, checkinDate, checkoutDate));
+        executorService.execute(new ReservationWriter(reservationService, true, HotelReservationApplication.dbHelper,
+                HotelReservationApplication.connection, reservationRoom, reservationRoom.getID(), customer, checkinDate, checkoutDate));
         Thread.sleep(5000);
         lock.unlock();
         detailController.goPaymentResultPage();

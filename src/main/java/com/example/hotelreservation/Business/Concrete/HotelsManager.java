@@ -17,7 +17,7 @@ public class HotelsManager implements IHotelsManager {
     }
 
     @Override
-    public ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection,String script) {
+    public ArrayList<HotelRoom> getAllRooms(DbHelper dbHelper, Connection connection,String script,int dateDiff) {
         ResultSet resultSet;
 
         ArrayList<HotelRoom> roomsArrayList = new ArrayList<HotelRoom>();
@@ -33,7 +33,8 @@ public class HotelsManager implements IHotelsManager {
                         resultSet.getString(4),
                         resultSet.getDouble(5),
                         resultSet.getDouble(6),
-                        resultSet.getString(7)
+                        resultSet.getString(7),
+                        dateDiff
                 ));
             }
             resultSet.close();

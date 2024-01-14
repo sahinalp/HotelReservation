@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ public class HomeController implements Initializable {
     public static Customer customer;
     private static boolean isStageShowEventRun = false;
 
+    protected static int dateDiff;
     @FXML
     protected DatePicker checkinDate;
     @FXML
@@ -71,16 +73,21 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LocalDate minCheckinDate = LocalDate.now();
+        LocalDate minCheckoutDate = LocalDate.now().plusDays(1);
+        checkinDate.setValue(minCheckinDate);
+        checkoutDate.setValue(minCheckoutDate);
+        dateDiff = 1;
         hotelRoomList = FXCollections.observableArrayList();
         roomsArrayList = hotelsManager.getAllRooms(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-                "");
+                "",dateDiff);
         hotelRoomList.addAll(roomsArrayList);
         roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         hotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
         roomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         hotelRank.setCellValueFactory(new PropertyValueFactory<>("hotelRank"));
-        priceCurrency.setCellValueFactory(new PropertyValueFactory<>("priceCurrency"));
+        priceCurrency.setCellValueFactory(new PropertyValueFactory<>("price"));
         roomListTable.setItems(hotelRoomList);
         if (customer != null) {
             userMenu.setText(customer.getName() + " " + customer.getSurname());
@@ -88,10 +95,8 @@ public class HomeController implements Initializable {
             userLogin.setDisable(true);
             userMenu.setVisible(true);
             userMenu.setDisable(false);
-            LocalDate minCheckinDate = LocalDate.now();
-            LocalDate minCheckoutDate = LocalDate.now().plusDays(1);
-            checkinDate.setValue(minCheckinDate);
-            checkoutDate.setValue(minCheckoutDate);
+
+
         }
     }
 
@@ -337,9 +342,10 @@ public class HomeController implements Initializable {
 
     @FXML
     protected void onRefreshButtonClick() throws IOException {
+        dateDiff = (int) Duration.between(checkinDate.getValue().atStartOfDay(),checkoutDate.getValue().atStartOfDay()).toDays();
         hotelRoomList = FXCollections.observableArrayList();
         roomsArrayList = hotelsManager.getAllRooms(HotelReservationApplication.dbHelper, HotelReservationApplication.connection,
-                "");
+                "",dateDiff);
         hotelRoomList.addAll(roomsArrayList);
         roomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         hotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
@@ -385,5 +391,14 @@ public class HomeController implements Initializable {
         userLogin.setVisible(true);
         userLogin.setDisable(false);
         customer = null;
+    }
+
+    @FXML
+    protected void dateChanged() throws IOException {
+        checkoutDate.setValue(checkinDate.getValue().plusDays(1));
+    }
+    @FXML
+    protected void setCheckoutDateChanged() throws IOException {
+        this.onRefreshButtonClick();
     }
 }
