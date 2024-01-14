@@ -10,27 +10,26 @@ import static com.example.hotelreservation.HotelReservationController.reservatio
 import java.sql.Connection;
 
 public class ReservationWriter implements Runnable {
+    private final IReservationService reservationService;           // create IReservationService
 
-    // create IReservationService
-    private final IReservationService reservationService;
-    // create boolean variable
-    private final boolean makeReservation;
+    private final boolean makeReservation;                          // create boolean variable
 
-    private final DbHelper dbHelper;
-    private final Connection connection;
-    private final Room room;
-    private final int reservationID;
+    private final DbHelper dbHelper;                                // create DbHelper
+    private final Connection connection;                            // create Connection
+    private final Room room;                                        // create Room
+    private final int reservationID;                                // create reservationID
 
-    private final Customer customer;
+    private final Customer customer;                                // create Customer
 
-    private final String checkInDate;
+    private final String checkInDate;                               // create checkInDate
 
-    private final String checkOutDate;
+    private final String checkOutDate;                              // create checkOutDate
 
 
     // create constructor
     public ReservationWriter(IReservationService reservationService, boolean makeReservation, DbHelper dbHelper,
                              Connection connection, Room room, int reservationID, Customer customer, String checkInDate, String checkOutDate) {
+        // initialize variables
         this.reservationService = reservationService;
         this.makeReservation = makeReservation;
         this.dbHelper = dbHelper;
@@ -42,12 +41,15 @@ public class ReservationWriter implements Runnable {
         this.checkOutDate = checkOutDate;
     }
 
+    // run method
     @Override
     public void run() {
-        // make reservation or cancel reservation
+        // check if makeReservation is true
         if (makeReservation) {
+            // make reservation
             reservationResult = reservationService.makeReservation(dbHelper, connection, room, customer, checkInDate, checkOutDate);
         } else {
+            // cancel reservation
             reservationResult = reservationService.cancelReservation(dbHelper, connection, room, reservationID);
         }
     }
